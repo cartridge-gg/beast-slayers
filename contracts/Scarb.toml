@@ -1,0 +1,20 @@
+[package]
+cairo-version = "=2.7.0"
+name = "beastslayers"
+version = "0.1.0"
+
+[cairo]
+sierra-replace-ids = true
+
+[scripts]
+migrate = "sozo build && sozo migrate apply"
+spawn = "./scripts/spawn.sh"
+move = "./scripts/move.sh"
+
+[dependencies]
+dojo = { git = "https://github.com/dojoengine/dojo", rev = "a3ddf39dee725c5ca5f7b889e728a40d7efffc4c" }
+
+[[target.dojo]]
+
+[profile.dev]
+[profile.sepolia]
