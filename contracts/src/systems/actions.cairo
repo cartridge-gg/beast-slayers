@@ -34,7 +34,7 @@ mod actions {
             game.current_beast.health -= damage;
             player.score += game.current_beast.level;
 
-            if player.score > (player.level*player.level*player.level) + 100 {
+            if player.score > (player.level*player.level*player.level) * 5 + 50 {
                 player.level += 1;
             }
 
@@ -64,7 +64,7 @@ mod actions {
             game.current_beast.health -= damage;
             player.score += game.current_beast.level;
 
-            if player.score > (player.level*player.level*player.level) + 100 {
+            if player.score > (player.level*player.level*player.level) * 5 + 50 {
                 player.level += 1;
             }
 
