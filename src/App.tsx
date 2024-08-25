@@ -45,7 +45,7 @@ function App() {
       </div>
       <h1>TWA + Vite + React</h1>
       <span>
-        {JSON.stringify(launchParams)}
+        launch params: {JSON.stringify(launchParams)}
       </span>
       <div className="card">
         <button>
