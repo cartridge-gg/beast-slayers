@@ -3,25 +3,14 @@ import twaLogo from './assets/tapps.png'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import { useConnect, useDisconnect, useAccount } from '@starknet-react/core'
-import { useBiometryManagerRaw } from '@telegram-apps/sdk-react'
-import CartridgeConnector from '@cartridge/connector'
+import { useBiometryManagerRaw, useLaunchParams } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { Policy } from '@cartridge/controller'
+import { Link } from 'react-router-dom'
 // import { useBiometryManager, useSettingsButton } from '@telegram-apps/sdk-react'
 // import { useEffect } from 'react'
 
 function App() {
-  const { connect, connectors } = useConnect()
-  const { disconnect } = useDisconnect()
-  const { account } = useAccount()
-  // const { provider } = useProvider()
-
-  const cartridgeConnector = connectors[0] as CartridgeConnector
-  cartridgeConnector.controller.keychain?.session
-
-  const [searchParams] = useSearchParams()
+  const launchParams = useLaunchParams()
 
   const policies = JSON.stringify([
     {
@@ -38,11 +27,6 @@ function App() {
 
   useEffect(() => {
     
-
-    console.log()
-
-    const session = JSON.parse(searchParams.get('session') || '{}')
-    console.log(session)
   }, [])
 
 
@@ -60,6 +44,9 @@ function App() {
         </a>
       </div>
       <h1>TWA + Vite + React</h1>
+      <span>
+        {JSON.stringify(launchParams)}
+      </span>
       <div className="card">
         <button>
         <Link to={encodeURI(`https://x.cartridge.gg/slot/session?policies=${policies}&callback_uri=${callbackUri}&username=nas&rpc_url=https://api.cartridge.gg/x/starknet/sepolia`)}>Connect controller</Link>
