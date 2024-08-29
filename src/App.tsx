@@ -6,13 +6,7 @@ import toast from "react-hot-toast";
 import { useAccount, AccountProvider } from "./hooks/useAccount";
 
 function AppContent() {
-  const {
-    accountStorage,
-    sessionSigner,
-    account,
-    openConnectionPage,
-    clearSession,
-  } = useAccount();
+  const { accountStorage, sessionSigner, account, openConnectionPage, clearSession } = useAccount();
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -21,18 +15,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-      }}
-    >
+    <div className="fixed inset-0 flex flex-col overflow-hidden">
       <Particles
         options={{
           fpsLimit: 120,
@@ -164,37 +147,15 @@ function AppContent() {
           },
         }}
       />
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "20px",
-          height: "100%",
-        }}
-      >
+      <div className="relative z-10 flex flex-col justify-between p-5 h-full">
         <div>
-          <h1
-            style={{ color: "#fff", textAlign: "center", marginBottom: "20px" }}
-          >
-            Dojo Flip
-          </h1>
+          <h1 className="text-white text-center mb-5 text-6xl">Beast Slayers</h1>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            maxHeight: "60%",
-            overflowY: "auto",
-          }}
-        >
-          <button onClick={openConnectionPage} style={buttonStyle}>
+        <div className="flex flex-col gap-2.5 max-h-[60%] overflow-y-auto">
+          <button onClick={openConnectionPage} className="btn">
             Connect
           </button>
-          <button onClick={clearSession} style={buttonStyle}>
+          <button onClick={clearSession} className="btn">
             Clear session and account
           </button>
           <button
@@ -212,18 +173,12 @@ function AppContent() {
               ]);
               toast.success(`Transaction hash: ${tx}`);
             }}
-            style={buttonStyle}
+            className="btn"
           >
             Flip
           </button>
         </div>
-        <div
-          style={{
-            marginTop: "20px",
-            maxHeight: "30%",
-            overflowY: "auto",
-          }}
-        >
+        <div className="mt-5 max-h-[30%] overflow-y-auto">
           <div className="card">
             <strong>Session:</strong>
             <pre>{JSON.stringify(sessionSigner, null, 2)}</pre>
@@ -237,16 +192,6 @@ function AppContent() {
     </div>
   );
 }
-
-const buttonStyle = {
-  padding: "10px 15px",
-  fontSize: "16px",
-  backgroundColor: "#5288c1",
-  color: "#ffffff",
-  border: "none",
-  borderRadius: "5px",
-  cursor: "pointer",
-};
 
 function App() {
   return (

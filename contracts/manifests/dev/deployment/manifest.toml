@@ -24,8 +24,8 @@ manifest_name = "dojo-base"
 [[contracts]]
 kind = "DojoContract"
 address = "0x4b3766d42364952caf320f2bce9a0a18e32381fb14108554bad04c60aae2a0f"
-class_hash = "0x54f0cdc91e79a0d77dc2f7785a0f4cb2758ec6610ed0bf3f81d590dcaf5734a"
-original_class_hash = "0x54f0cdc91e79a0d77dc2f7785a0f4cb2758ec6610ed0bf3f81d590dcaf5734a"
+class_hash = "0xf47882302c7569a6350ffd4cd10d777f661c687f331dc460cc09fab4fd7fef"
+original_class_hash = "0xf47882302c7569a6350ffd4cd10d777f661c687f331dc460cc09fab4fd7fef"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/beastslayers-actions-35befdaf.json"
 reads = []
