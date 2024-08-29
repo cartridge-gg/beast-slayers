@@ -101,7 +101,7 @@ function App() {
   const openConnectionPage = useCallback(() => {
     if (!sessionSigner) return;
 
-    utils.openLink(encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${encodeURIComponent(JSON.stringify(POLICIES))}`))
+    utils.openLink(encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`))
   }, [sessionSigner, utils]);
 
   return (
@@ -124,7 +124,7 @@ function App() {
         </button>
       </div>
       <div>
-        {encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${encodeURIComponent(JSON.stringify(POLICIES))}`)}
+        {encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`)}
       </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
       <div className="card">{JSON.stringify(accountStorage)}</div>
