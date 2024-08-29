@@ -1,7 +1,6 @@
 import "./App.css";
 
 import {
-  mockTelegramEnv,
   useCloudStorage,
   useLaunchParams,
   useUtils,
@@ -20,6 +19,7 @@ import toast from "react-hot-toast";
 interface AccountStorage {
   username: string;
   address: string;
+  ownerGuid: string;
   transactionHash?: string;
 }
 
@@ -28,25 +28,25 @@ interface SessionSigner {
   publicKey: string;
 }
 
-mockTelegramEnv({
-  themeParams: {
-    accentTextColor: "#6ab2f2",
-    bgColor: "#17212b",
-    buttonColor: "#5288c1",
-    buttonTextColor: "#ffffff",
-    destructiveTextColor: "#ec3942",
-    headerBgColor: "#17212b",
-    hintColor: "#708499",
-    linkColor: "#6ab3f3",
-    secondaryBgColor: "#232e3c",
-    sectionBgColor: "#17212b",
-    sectionHeaderTextColor: "#6ab3f3",
-    subtitleTextColor: "#708499",
-    textColor: "#f5f5f5",
-  },
-  version: "7.2",
-  platform: "tdesktop",
-});
+// mockTelegramEnv({
+//   themeParams: {
+//     accentTextColor: "#6ab2f2",
+//     bgColor: "#17212b",
+//     buttonColor: "#5288c1",
+//     buttonTextColor: "#ffffff",
+//     destructiveTextColor: "#ec3942",
+//     headerBgColor: "#17212b",
+//     hintColor: "#708499",
+//     linkColor: "#6ab3f3",
+//     secondaryBgColor: "#232e3c",
+//     sectionBgColor: "#17212b",
+//     sectionHeaderTextColor: "#6ab3f3",
+//     subtitleTextColor: "#708499",
+//     textColor: "#f5f5f5",
+//   },
+//   version: "7.2",
+//   platform: "tdesktop",
+// });
 
 function App() {
   const { initData } = useLaunchParams();
@@ -93,11 +93,14 @@ function App() {
   const account = useMemo(() => {
     if (!accountStorage || !sessionSigner) return;
 
+    console.log("accountStorage", accountStorage);
+    console.log("sessionSigner", sessionSigner);
+
     return CartridgeSessionAccount.new_as_registered(
       RPC_URL,
       sessionSigner.privateKey,
       accountStorage.address,
-      sessionSigner.publicKey,
+      accountStorage.ownerGuid,
       Dojo.cairoShortStringToFelt("SN_SEPOLIA"),
       {
         expiresAt: 3000000000,
@@ -323,7 +326,7 @@ function App() {
               try {
                 const tx = await account?.execute([
                   {
-                    calldata: [123, 234],
+                    calldata: ['123', '234'],
                     entrypoint: "flip",
                     contractAddress:
                       "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476",
