@@ -76,7 +76,7 @@ function App() {
       RPC_URL,
       sessionSigner.privateKey,
       accountStorage.address,
-      accountStorage.starkPubKey,
+      sessionSigner.publicKey,
       Dojo.cairoShortStringToFelt("SN_SEPOLIA"),
       {
         expiresAt: 3000000000,
