@@ -100,13 +100,7 @@ function App() {
   const openConnectionPage = useCallback(() => {
     if (!sessionSigner) return;
 
-    const url = new URL(KEYCHAIN_URL);
-    url.searchParams.append("public_key", sessionSigner?.publicKey);
-    url.searchParams.append("redirect_uri", REDIRECT_URI);
-    url.searchParams.append("redirect_query_name", "startapp");
-    url.searchParams.append("policies", JSON.stringify(POLICIES));
-
-    utils.openLink(url.toString());
+    utils.openLink(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`)
   }, [sessionSigner, utils]);
 
   return (
