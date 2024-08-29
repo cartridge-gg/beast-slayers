@@ -29,22 +29,22 @@ interface SessionSigner {
 
 mockTelegramEnv({
   themeParams: {
-    accentTextColor: '#6ab2f2',
-    bgColor: '#17212b',
-    buttonColor: '#5288c1',
-    buttonTextColor: '#ffffff',
-    destructiveTextColor: '#ec3942',
-    headerBgColor: '#17212b',
-    hintColor: '#708499',
-    linkColor: '#6ab3f3',
-    secondaryBgColor: '#232e3c',
-    sectionBgColor: '#17212b',
-    sectionHeaderTextColor: '#6ab3f3',
-    subtitleTextColor: '#708499',
-    textColor: '#f5f5f5',
+    accentTextColor: "#6ab2f2",
+    bgColor: "#17212b",
+    buttonColor: "#5288c1",
+    buttonTextColor: "#ffffff",
+    destructiveTextColor: "#ec3942",
+    headerBgColor: "#17212b",
+    hintColor: "#708499",
+    linkColor: "#6ab3f3",
+    secondaryBgColor: "#232e3c",
+    sectionBgColor: "#17212b",
+    sectionHeaderTextColor: "#6ab3f3",
+    subtitleTextColor: "#708499",
+    textColor: "#f5f5f5",
   },
-  version: '7.2',
-  platform: 'tdesktop',
+  version: "7.2",
+  platform: "tdesktop",
 });
 
 function App() {
@@ -163,10 +163,12 @@ function App() {
   }, []);
 
   return (
-    <div style={{
-      position: "relative",
-      flex: 1,
-    }}>
+    <div
+      style={{
+        position: "relative",
+        flex: 1,
+      }}
+    >
       <Particles
         options={{
           fpsLimit: 120,
@@ -298,13 +300,13 @@ function App() {
           },
         }}
       />
-      <div style={{
-        zIndex: 10000
-      }}>
-        <div className="card">
+      <div
+        style={{
+          zIndex: 10000,
+        }}
+      >
+        <div>
           <button onClick={openConnectionPage}>Connect</button>
-        </div>
-        <div className="card">
           <button
             onClick={() => {
               storage.delete("sessionSigner");
@@ -315,10 +317,21 @@ function App() {
           >
             Clear session and account
           </button>
+          <button onClick={async () => {
+            await account?.execute([{
+              calldata: [123, 234],
+              entrypoint: "flip",
+              contractAddress: "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476"
+            }])
+          }}>
+            flip
+          </button>
+          <div className="card">session:{JSON.stringify(sessionSigner)}</div>
+          <div className="card">account:{JSON.stringify(accountStorage)}</div>
+          <div className="card">
+            initdata:{JSON.stringify(initData?.startParam)}
+          </div>
         </div>
-        <div className="card">session:{JSON.stringify(sessionSigner)}</div>
-        <div className="card">account:{JSON.stringify(accountStorage)}</div>
-        <div className="card">initdata:{JSON.stringify(initData?.startParam)}</div>
       </div>
     </div>
   );
