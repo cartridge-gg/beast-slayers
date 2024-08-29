@@ -116,10 +116,10 @@ function App() {
             to={encodeURI(
               `${KEYCHAIN_URL}/session?public_key=${
                 sessionSigner?.publicKey
-              }&redirect_uri=${encodeURI(
+              }&redirect_uri=${encodeURIComponent(
                 REDIRECT_URI
-              )}&redirect_query_name=startapp&policies=${JSON.stringify(
-                POLICIES
+              )}&redirect_query_name=startapp&policies=${encodeURIComponent(
+                JSON.stringify(POLICIES)
               )}`
             )}
           >
