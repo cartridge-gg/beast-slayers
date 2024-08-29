@@ -3,9 +3,8 @@ import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import { useCloudStorage, useLaunchParams } from "@telegram-apps/sdk-react";
-import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCloudStorage, useLaunchParams, useUtils } from "@telegram-apps/sdk-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartridgeSessionAccount } from "./account-wasm/account_wasm";
 import * as Dojo from "@dojoengine/torii-wasm";
 import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "./constants";
@@ -96,7 +95,9 @@ function App() {
     );
   }, [initData, storage]);
 
-  const connectUrl = useMemo(() => {
+  const utils = useUtils()
+
+  const openConnectionPage = useCallback(() => {
     if (!sessionSigner) return;
 
     const url = new URL(KEYCHAIN_URL);
@@ -105,8 +106,8 @@ function App() {
     url.searchParams.append("redirect_query_name", "startapp");
     url.searchParams.append("policies", JSON.stringify(POLICIES));
 
-    return url.toString();
-  }, [sessionSigner]);
+    utils.openLink(url.toString());
+  }, [sessionSigner, utils]);
 
   return (
     <>
@@ -123,8 +124,8 @@ function App() {
       </div>
       <h1>TWA + Vite + React</h1>
       <div className="card">
-        <button>
-          <Link to={connectUrl ?? ""}>Connect controller</Link>
+        <button onClick={openConnectionPage}>
+          Connect
         </button>
       </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
