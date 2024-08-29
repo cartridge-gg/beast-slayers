@@ -3,12 +3,16 @@ import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import { useCloudStorage, useLaunchParams, useUtils } from "@telegram-apps/sdk-react";
+import {
+  useCloudStorage,
+  useLaunchParams,
+  useUtils,
+} from "@telegram-apps/sdk-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartridgeSessionAccount } from "./account-wasm/account_wasm";
 import * as Dojo from "@dojoengine/torii-wasm";
 import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "./constants";
-import encodeUrl from 'encodeurl'
+import encodeUrl from "encodeurl";
 // import { useBiometryManager, useSettingsButton } from '@telegram-apps/sdk-react'
 // import { useEffect } from 'react'
 
@@ -31,7 +35,7 @@ function App() {
 
   const [accountStorage, setAccountStorage] = useState<AccountStorage>();
   const [sessionSigner, setSessionSigner] = useState<SessionSigner>();
- 
+
   useEffect(() => {
     storage.get("sessionSigner").then((signer) => {
       if (signer) return setSessionSigner(JSON.parse(signer) as SessionSigner);
@@ -55,7 +59,11 @@ function App() {
 
     storage.get("account").then((account) => {
       if (account)
-        return setAccountStorage(JSON.parse(account) as AccountStorage);
+        try {
+          setAccountStorage(JSON.parse(account) as AccountStorage);
+        } catch (e) {
+          console.error(e);
+        }
     });
   }, [storage]);
 
@@ -96,12 +104,20 @@ function App() {
     );
   }, [initData, storage]);
 
-  const utils = useUtils()
+  const utils = useUtils();
 
   const openConnectionPage = useCallback(() => {
     if (!sessionSigner) return;
 
-    utils.openLink(encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`))
+    utils.openLink(
+      encodeUrl(
+        `${KEYCHAIN_URL}/session?public_key=${
+          sessionSigner.publicKey
+        }&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(
+          POLICIES
+        )}`
+      )
+    );
   }, [sessionSigner, utils]);
 
   return (
@@ -119,12 +135,7 @@ function App() {
       </div>
       <h1>TWA + Vite + React</h1>
       <div className="card">
-        <button onClick={openConnectionPage}>
-          Connect
-        </button>
-      </div>
-      <div>
-        {encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`)}
+        <button onClick={openConnectionPage}>Connect</button>
       </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
       <div className="card">{JSON.stringify(accountStorage)}</div>
