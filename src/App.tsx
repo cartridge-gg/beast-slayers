@@ -319,6 +319,7 @@ function App() {
           </button>
           <button
             onClick={async () => {
+              toast("Test");
               try {
                 const tx = await account?.execute([
                   {
