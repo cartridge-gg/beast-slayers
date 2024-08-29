@@ -318,6 +318,7 @@ function App() {
         </div>
         <div className="card">{JSON.stringify(sessionSigner)}</div>
         <div className="card">{JSON.stringify(accountStorage)}</div>
+        <div className="card">{JSON.stringify(initData?.startParam)}</div>
       </div>
     </div>
   );
