@@ -320,7 +320,7 @@ function App() {
           <button onClick={async () => {
             await account?.execute([{
               calldata: [123, 234],
-              entrypoint: "flip",
+              entrypoint: "0x16ef95138c9aa6fc0fc33afb9c61bb877a82fb413f53bdf8ae9520a2ef42d41",
               contractAddress: "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476"
             }])
           }}>
