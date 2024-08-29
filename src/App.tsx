@@ -319,7 +319,7 @@ function App() {
           </button>
           <button
             onClick={async () => {
-              toast("Test");
+              toast(JSON.stringify(account))
               try {
                 const tx = await account?.execute([
                   {
