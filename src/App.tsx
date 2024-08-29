@@ -62,8 +62,8 @@ function AppContent() {
       .then((entities) => {
         const game = Object.values(entities)[0]["beastslayers-Game"];
         setBeast({
-          health: (game.current_beast.value as any).get("health"),
-          level: (game.current_beast.value as any).get("level"),
+          health: (game.current_beast.value as any).get("health").value,
+          level: (game.current_beast.value as any).get("level").value,
         });
       });
   }, [client]);
