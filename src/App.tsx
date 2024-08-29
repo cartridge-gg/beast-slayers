@@ -3,32 +3,80 @@ import twaLogo from './assets/tapps.png'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import { useBiometryManagerRaw, useLaunchParams } from '@telegram-apps/sdk-react'
-import { useEffect } from 'react'
+import { useCloudStorage, useLaunchParams } from '@telegram-apps/sdk-react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CartridgeSessionAccount } from './account-wasm/account_wasm'
+import * as Dojo from '@dojoengine/torii-wasm'
+import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from './constants'
 // import { useBiometryManager, useSettingsButton } from '@telegram-apps/sdk-react'
 // import { useEffect } from 'react'
 
+interface AccountStorage {
+  username: string
+  address: string
+  webauthnPublicKey: string
+}
+
+interface SessionSigner {
+  privateKey: string
+  publicKey: string
+}
+
 function App() {
-  const launchParams = useLaunchParams()
+  const { initData } = useLaunchParams()
 
-  const policies = JSON.stringify([
-    {
-      target: '0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476',
-      method: 'flip',
-      description: 'Flip a tile at given x and y coordinates'
-    }
-  ])
+  // const bm = useBiometryManager();
+  const storage = useCloudStorage()
 
-  const callbackUri = 'https://localhost:5173/callback'
-
-  const bm = useBiometryManagerRaw();
-
+  const [accountStorage, setAccountStorage] = useState<AccountStorage>()
+  const [sessionSigner, setSessionSigner] = useState<SessionSigner>()
 
   useEffect(() => {
-    
-  }, [])
+    storage.get('sessionSigner').then(signer => {
+      if (signer) return setSessionSigner(JSON.parse(signer) as SessionSigner)
 
+      const privateKey = Dojo.signingKeyNew()
+      const publicKey = Dojo.verifyingKeyNew(privateKey)
+
+      storage.set('sessionSigner', JSON.stringify({
+        privateKey,
+        publicKey
+      }))
+
+      setSessionSigner({
+        privateKey,
+        publicKey
+      })
+    })
+
+    storage.get('account').then(account => {
+      if (account) return setAccountStorage(JSON.parse(account) as AccountStorage)
+    })
+    
+  }, [storage])
+
+  const account = useMemo(() => {
+    if (!accountStorage || !sessionSigner) return
+    
+    return CartridgeSessionAccount.new_as_registered(RPC_URL, sessionSigner.privateKey, accountStorage.address, accountStorage.webauthnPublicKey, Dojo.cairoShortStringToFelt('SN_SEPOLIA'), {
+      expiresAt: 3000000000,
+      policies: POLICIES
+    })
+  }, [accountStorage, sessionSigner])
+  console.log(account)
+
+  useEffect(() => {
+    if (!initData?.startParam) return
+    
+    const cartridgeAccount = JSON.parse(atob(initData.startParam)) as { username: string, address: string, webauthnPublicKey: string, transactionHash?: string }
+
+    storage.set('account', JSON.stringify({
+      username: cartridgeAccount.username,
+      address: cartridgeAccount.address,
+      webauthnPublicKey: cartridgeAccount.webauthnPublicKey
+    }))
+  }, [initData, storage])
 
   return (
     <>
@@ -44,28 +92,16 @@ function App() {
         </a>
       </div>
       <h1>TWA + Vite + React</h1>
-      <span>
-        launch params: {JSON.stringify(launchParams)}
-      </span>
       <div className="card">
         <button>
-        <Link to={encodeURI(`https://x.cartridge.gg/slot/session?policies=${policies}&callback_uri=${callbackUri}&username=nas&rpc_url=https://api.cartridge.gg/x/starknet/sepolia`)}>Connect controller</Link>
+        <Link to={encodeURI(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&policies=${JSON.stringify(POLICIES)}&redirect_query_name=startapp`)}>Connect controller</Link>
         </button>
       </div>
-
-      <button onClick={() => {
-        if (!bm.result) return
-        bm.result.requestAccess({ reason: 'pwease'}).then(console.log)
-      }}>
-        gib data
-      </button>
       <div className="card">
-        <button onClick={() => {
-          if (!bm.result) return
-          bm.result.openSettings()
-        }}>
-            Bio settings
-        </button>
+        {JSON.stringify(sessionSigner)}
+      </div>
+      <div className="card">
+        {JSON.stringify(accountStorage)}
       </div>
     </>
   )
