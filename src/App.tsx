@@ -96,6 +96,18 @@ function App() {
     );
   }, [initData, storage]);
 
+  const connectUrl = useMemo(() => {
+    if (!sessionSigner) return;
+
+    const url = new URL(KEYCHAIN_URL);
+    url.searchParams.append("public_key", sessionSigner?.publicKey);
+    url.searchParams.append("redirect_uri", REDIRECT_URI);
+    url.searchParams.append("redirect_query_name", "startapp");
+    url.searchParams.append("policies", JSON.stringify(POLICIES));
+
+    return url.toString();
+  }, [sessionSigner]);
+
   return (
     <>
       <div>
@@ -112,17 +124,7 @@ function App() {
       <h1>TWA + Vite + React</h1>
       <div className="card">
         <button>
-          <Link
-            to={`${KEYCHAIN_URL}/session?public_key=${
-              sessionSigner?.publicKey
-            }&redirect_uri=${encodeURIComponent(
-              REDIRECT_URI
-            )}&redirect_query_name=startapp&policies=${encodeURIComponent(
-              JSON.stringify(POLICIES)
-            )}`}
-          >
-            Connect controller
-          </Link>
+          <Link to={connectUrl ?? ""}>Connect controller</Link>
         </button>
       </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
