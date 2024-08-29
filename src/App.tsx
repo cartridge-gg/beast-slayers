@@ -81,7 +81,7 @@ function App() {
     storage.get("account").then((account) => {
       if (account) {
         const parsedAccount = JSON.parse(account) as AccountStorage;
-        if (!parsedAccount.address) {
+        if (!parsedAccount.address || !parsedAccount.ownerGuid) {
           return storage.delete("account");
         }
 
