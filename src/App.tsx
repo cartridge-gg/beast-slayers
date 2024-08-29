@@ -123,6 +123,9 @@ function App() {
           Connect
         </button>
       </div>
+      <div>
+        {encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`)}
+      </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
       <div className="card">{JSON.stringify(accountStorage)}</div>
     </>
