@@ -1,6 +1,7 @@
 import "./App.css";
 
 import {
+  mockTelegramEnv,
   useCloudStorage,
   useLaunchParams,
   useUtils,
@@ -25,6 +26,26 @@ interface SessionSigner {
   privateKey: string;
   publicKey: string;
 }
+
+mockTelegramEnv({
+  themeParams: {
+    accentTextColor: '#6ab2f2',
+    bgColor: '#17212b',
+    buttonColor: '#5288c1',
+    buttonTextColor: '#ffffff',
+    destructiveTextColor: '#ec3942',
+    headerBgColor: '#17212b',
+    hintColor: '#708499',
+    linkColor: '#6ab3f3',
+    secondaryBgColor: '#232e3c',
+    sectionBgColor: '#17212b',
+    sectionHeaderTextColor: '#6ab3f3',
+    subtitleTextColor: '#708499',
+    textColor: '#f5f5f5',
+  },
+  version: '7.2',
+  platform: 'tdesktop',
+});
 
 function App() {
   const { initData } = useLaunchParams();
@@ -142,7 +163,10 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div style={{
+      position: "relative",
+      flex: 1,
+    }}>
       <Particles
         options={{
           fpsLimit: 120,
@@ -241,7 +265,7 @@ function App() {
               },
               resize: {
                 enable: true,
-              }
+              },
             },
             modes: {
               grab: {
@@ -274,24 +298,28 @@ function App() {
           },
         }}
       />
-      <div className="card">
-        <button onClick={openConnectionPage}>Connect</button>
+      <div style={{
+        zIndex: 10000
+      }}>
+        <div className="card">
+          <button onClick={openConnectionPage}>Connect</button>
+        </div>
+        <div className="card">
+          <button
+            onClick={() => {
+              storage.delete("sessionSigner");
+              storage.delete("account");
+              setSessionSigner(undefined);
+              setAccountStorage(undefined);
+            }}
+          >
+            Clear session and account
+          </button>
+        </div>
+        <div className="card">{JSON.stringify(sessionSigner)}</div>
+        <div className="card">{JSON.stringify(accountStorage)}</div>
       </div>
-      <div className="card">
-        <button
-          onClick={() => {
-            storage.delete("sessionSigner");
-            storage.delete("account");
-            setSessionSigner(undefined);
-            setAccountStorage(undefined);
-          }}
-        >
-          Clear session and account
-        </button>
-      </div>
-      <div className="card">{JSON.stringify(sessionSigner)}</div>
-      <div className="card">{JSON.stringify(accountStorage)}</div>
-    </>
+    </div>
   );
 }
 
