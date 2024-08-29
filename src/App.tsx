@@ -94,7 +94,7 @@ function App() {
       <h1>TWA + Vite + React</h1>
       <div className="card">
         <button>
-        <Link to={encodeURI(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&policies=${JSON.stringify(POLICIES)}&redirect_query_name=startapp`)}>Connect controller</Link>
+        <Link to={encodeURI(`${KEYCHAIN_URL}/session?public_key=${sessionSigner?.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`)}>Connect controller</Link>
         </button>
       </div>
       <div className="card">
