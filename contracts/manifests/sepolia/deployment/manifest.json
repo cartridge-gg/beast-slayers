@@ -1,8 +1,8 @@
 {
   "world": {
     "kind": "WorldContract",
-    "class_hash": "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c",
-    "original_class_hash": "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c",
+    "class_hash": "0xa349b743d361ce4567361475a89b84a386bb383448c6926954e5fe0b525597",
+    "original_class_hash": "0xa349b743d361ce4567361475a89b84a386bb383448c6926954e5fe0b525597",
     "abi": [
       {
         "type": "impl",
@@ -1229,13 +1229,13 @@
         ]
       }
     ],
-    "address": "0x15c9506b36b158cee641f149e7f1ca5e4883eb2c6d5df9960f29af4245eb791",
-    "transaction_hash": "0x2723d07f94cde533b7652c035e11abdcffc04c45ca2109332f2cc7c253b8bd3",
-    "block_number": 3,
-    "seed": "beastslayers",
+    "address": "0x7c0cb0901b18ef21fbffbe52c16057d560a0b7758732d12b701eea6e8e81a90",
+    "transaction_hash": "0x366720c77821a18ff52ed3603fb303266b2ab9d23fba96a2c09d5a7ba8c06fe",
+    "block_number": null,
+    "seed": "beastslayers-sepolia-1",
     "metadata": {
-      "profile_name": "dev",
-      "rpc_url": "http://localhost:5050/"
+      "profile_name": "sepolia",
+      "rpc_url": "https://api.cartridge.gg/x/starknet/sepolia"
     },
     "manifest_name": "dojo-world"
   },
@@ -1243,16 +1243,16 @@
     "kind": "Class",
     "class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
     "original_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
-    "abi": "manifests/dev/deployment/abis/dojo-base.json",
+    "abi": "manifests/sepolia/deployment/abis/dojo-base.json",
     "tag": "dojo-base",
     "manifest_name": "dojo-base"
   },
   "contracts": [
     {
       "kind": "DojoContract",
-      "address": "0x4b3766d42364952caf320f2bce9a0a18e32381fb14108554bad04c60aae2a0f",
-      "class_hash": "0xf47882302c7569a6350ffd4cd10d777f661c687f331dc460cc09fab4fd7fef",
-      "original_class_hash": "0xf47882302c7569a6350ffd4cd10d777f661c687f331dc460cc09fab4fd7fef",
+      "address": "0x6757c40822c377ba8bf68682bd9f673dda75d77d71d81668c3a39e83ff0ead7",
+      "class_hash": "0x55d065016abf6c69c46fd269920e59875720649a5d212a4e7bc83153bcecbda",
+      "original_class_hash": "0x55d065016abf6c69c46fd269920e59875720649a5d212a4e7bc83153bcecbda",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
