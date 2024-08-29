@@ -113,15 +113,13 @@ function App() {
       <div className="card">
         <button>
           <Link
-            to={encodeURI(
-              `${KEYCHAIN_URL}/session?public_key=${
-                sessionSigner?.publicKey
-              }&redirect_uri=${encodeURIComponent(
-                REDIRECT_URI
-              )}&redirect_query_name=startapp&policies=${encodeURIComponent(
-                JSON.stringify(POLICIES)
-              )}`
-            )}
+            to={`${KEYCHAIN_URL}/session?public_key=${
+              sessionSigner?.publicKey
+            }&redirect_uri=${encodeURIComponent(
+              REDIRECT_URI
+            )}&redirect_query_name=startapp&policies=${encodeURIComponent(
+              JSON.stringify(POLICIES)
+            )}`}
           >
             Connect controller
           </Link>
