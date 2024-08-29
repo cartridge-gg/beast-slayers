@@ -183,7 +183,7 @@ function AppContent() {
               try {
                 const tx = await account?.execute([
                   {
-                    calldata: [(Math.random() * 1000).toString(16), (Math.random() * 1000).toString(16)],
+                    calldata: [(Math.floor(Math.random() * 1000)).toString(16), (Math.floor(Math.random() * 1000)).toString(16)],
                     entrypoint: "flip",
                     contractAddress:
                       "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476",
