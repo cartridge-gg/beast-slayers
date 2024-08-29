@@ -58,12 +58,14 @@ function App() {
     });
 
     storage.get("account").then((account) => {
-      if (account)
-        try {
-          setAccountStorage(JSON.parse(account) as AccountStorage);
-        } catch (e) {
-          console.error(e);
+      if (account) {
+        const parsedAccount = JSON.parse(account) as AccountStorage;
+        if (!parsedAccount.address || !parsedAccount.webauthnPublicKey) {
+          return storage.delete("account");
         }
+
+        setAccountStorage(JSON.parse(account) as AccountStorage)
+      }
     });
   }, [storage]);
 
