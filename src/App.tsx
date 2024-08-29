@@ -19,7 +19,7 @@ import encodeUrl from "encodeurl";
 interface AccountStorage {
   username: string;
   address: string;
-  webauthnPublicKey: string;
+  starkPubKey: string;
 }
 
 interface SessionSigner {
@@ -60,7 +60,7 @@ function App() {
     storage.get("account").then((account) => {
       if (account) {
         const parsedAccount = JSON.parse(account) as AccountStorage;
-        if (!parsedAccount.address || !parsedAccount.webauthnPublicKey) {
+        if (!parsedAccount.address || !parsedAccount.starkPubKey) {
           return storage.delete("account");
         }
 
@@ -76,7 +76,7 @@ function App() {
       RPC_URL,
       sessionSigner.privateKey,
       accountStorage.address,
-      accountStorage.webauthnPublicKey,
+      accountStorage.starkPubKey,
       Dojo.cairoShortStringToFelt("SN_SEPOLIA"),
       {
         expiresAt: 3000000000,
@@ -89,20 +89,11 @@ function App() {
   useEffect(() => {
     if (!initData?.startParam) return;
 
-    const cartridgeAccount = JSON.parse(atob(initData.startParam)) as {
-      username: string;
-      address: string;
-      webauthnPublicKey: string;
-      transactionHash?: string;
-    };
+    const cartridgeAccount = JSON.parse(atob(initData.startParam)) as AccountStorage;
 
     storage.set(
       "account",
-      JSON.stringify({
-        username: cartridgeAccount.username,
-        address: cartridgeAccount.address,
-        webauthnPublicKey: cartridgeAccount.webauthnPublicKey,
-      })
+      JSON.stringify(cartridgeAccount)
     );
   }, [initData, storage]);
 
