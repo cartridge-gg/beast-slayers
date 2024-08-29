@@ -13,6 +13,7 @@ import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "./constants";
 import encodeUrl from "encodeurl";
 import { loadFull } from "tsparticles";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
+import toast from "react-hot-toast";
 // import { useBiometryManager, useSettingsButton } from '@telegram-apps/sdk-react'
 // import { useEffect } from 'react'
 
@@ -104,7 +105,6 @@ function App() {
       }
     );
   }, [accountStorage, sessionSigner]);
-  console.log(account);
 
   useEffect(() => {
     if (!initData?.startParam) return;
@@ -317,13 +317,23 @@ function App() {
           >
             Clear session and account
           </button>
-          <button onClick={async () => {
-            await account?.execute([{
-              calldata: [123, 234],
-              entrypoint: "0x16ef95138c9aa6fc0fc33afb9c61bb877a82fb413f53bdf8ae9520a2ef42d41",
-              contractAddress: "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476"
-            }])
-          }}>
+          <button
+            onClick={async () => {
+              try {
+                const tx = await account?.execute([
+                  {
+                    calldata: [123, 234],
+                    entrypoint: "flip",
+                    contractAddress:
+                      "0x77d04bd307605c021a1def7987278475342f4ea2581f7c49930e9269bedf476",
+                  },
+                ]);
+                toast.success(`Transaction hash: ${tx}`);
+              } catch (e) {
+                toast.error(`Error: ${e}`);
+              }
+            }}
+          >
             flip
           </button>
           <div className="card">session:{JSON.stringify(sessionSigner)}</div>
