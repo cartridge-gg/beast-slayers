@@ -8,13 +8,13 @@ import useSound from "use-sound";
 import crySoundFile from "./../public/sfx/cry.mp3";
 import nooSoundFile from "./../public/sfx/noo.mp3";
 import pssSoundFile from "./../public/sfx/pss.mp3";
-// import { createClient, ToriiClient } from "@dojoengine/torii-wasm";
+import { createClient, ToriiClient } from "@dojoengine/torii-wasm";
 import {
   ACTIONS_ADDRESS,
-  // RELAY_URL,
-  // RPC_URL,
-  // TORII_URL,
-  // WORLD_ADDRESS,
+  RELAY_URL,
+  RPC_URL,
+  TORII_URL,
+  WORLD_ADDRESS,
 } from "./constants";
 
 interface Beast {
@@ -29,44 +29,41 @@ function AppContent() {
   const imageControls = useAnimation();
   const animationRef = useRef<number>();
 
-  // const [client, setClient] = useState<ToriiClient>();
+  const [client, setClient] = useState<ToriiClient>();
 
-  // useEffect(() => {
-  //   createClient({
-  //     toriiUrl: TORII_URL,
-  //     rpcUrl: RPC_URL,
-  //     relayUrl: RELAY_URL,
-  //     worldAddress: WORLD_ADDRESS,
-  //   }).then(setClient);
-  // }, []);
+  useEffect(() => {
+    createClient({
+      toriiUrl: TORII_URL,
+      rpcUrl: RPC_URL,
+      relayUrl: RELAY_URL,
+      worldAddress: WORLD_ADDRESS,
+    }).then(setClient);
+  }, []);
 
-  const [beast] = useState<Beast>({
-    health: 100,
-    level: 1,
-  });
-  // useEffect(() => {
-  //   if (!client) return;
+  const [beast, setBeast] = useState<Beast>();
+  useEffect(() => {
+    if (!client) return;
 
-  //   client
-  //     .getEntities({
-  //       limit: 1,
-  //       offset: 0,
-  //       clause: {
-  //         Keys: {
-  //           keys: [undefined],
-  //           models: ["beastslayers-Game"],
-  //           pattern_matching: "FixedLen",
-  //         },
-  //       },
-  //     })
-  //     .then((entities) => {
-  //       const game = Object.values(entities)[0]["beastslayers-Game"];
-  //       setBeast({
-  //         health: (game.current_beast.value as any).get("health"),
-  //         level: (game.current_beast.value as any).get("level"),
-  //       });
-  //     });
-  // }, [client]);
+    client
+      .getEntities({
+        limit: 1,
+        offset: 0,
+        clause: {
+          Keys: {
+            keys: [undefined],
+            models: ["beastslayers-Game"],
+            pattern_matching: "FixedLen",
+          },
+        },
+      })
+      .then((entities) => {
+        const game = Object.values(entities)[0]["beastslayers-Game"];
+        setBeast({
+          health: (game.current_beast.value as any).get("health"),
+          level: (game.current_beast.value as any).get("level"),
+        });
+      });
+  }, [client]);
 
   useEffect(() => {
     const createParticle = () => ({
