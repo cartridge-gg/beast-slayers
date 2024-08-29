@@ -118,8 +118,8 @@ function App() {
                 sessionSigner?.publicKey
               }&redirect_uri=${encodeURI(
                 REDIRECT_URI
-              )}&redirect_query_name=startapp&policies=${encodeURIComponent(
-                JSON.stringify(POLICIES)
+              )}&redirect_query_name=startapp&policies=${JSON.stringify(
+                POLICIES
               )}`
             )}
           >
