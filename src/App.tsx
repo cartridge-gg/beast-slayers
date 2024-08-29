@@ -180,7 +180,6 @@ function AppContent() {
           <button
             onClick={async () => {
               toast(JSON.stringify(account))
-              try {
                 const tx = await account?.execute([
                   {
                     calldata: [(Math.floor(Math.random() * 1000)).toString(16), (Math.floor(Math.random() * 1000)).toString(16)],
@@ -190,9 +189,6 @@ function AppContent() {
                   },
                 ]);
                 toast.success(`Transaction hash: ${tx}`);
-              } catch (e) {
-                toast.error(`Error: ${e}`);
-              }
             }}
             style={buttonStyle}
           >
