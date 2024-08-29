@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartridgeSessionAccount } from "./account-wasm/account_wasm";
 import * as Dojo from "@dojoengine/torii-wasm";
 import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "./constants";
+import encodeUrl from 'encodeurl'
 // import { useBiometryManager, useSettingsButton } from '@telegram-apps/sdk-react'
 // import { useEffect } from 'react'
 
@@ -30,7 +31,7 @@ function App() {
 
   const [accountStorage, setAccountStorage] = useState<AccountStorage>();
   const [sessionSigner, setSessionSigner] = useState<SessionSigner>();
-
+ 
   useEffect(() => {
     storage.get("sessionSigner").then((signer) => {
       if (signer) return setSessionSigner(JSON.parse(signer) as SessionSigner);
@@ -100,7 +101,7 @@ function App() {
   const openConnectionPage = useCallback(() => {
     if (!sessionSigner) return;
 
-    utils.openLink(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=` + encodeURIComponent(JSON.stringify(POLICIES)))
+    utils.openLink(encodeUrl(`${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}`))
   }, [sessionSigner, utils]);
 
   return (

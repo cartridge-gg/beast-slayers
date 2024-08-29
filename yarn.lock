@@ -695,6 +695,11 @@
   resolved "https://registry.yarnpkg.com/@telegram-apps/sdk/-/sdk-1.1.3.tgz#e536b59968804ca3c29eacd7c29749221c6a32df"
   integrity sha512-gvcXNttbCouDNTxjDUbO5FS/BdaHYO0ibSddQxiYitShPIDZDxGon0Eh3OSsgUIVPSQSNdXqkXaeqYgA+jeY0A==
 
+"@types/encodeurl@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/encodeurl/-/encodeurl-1.0.2.tgz#993f4698cc1130875bf5131492c32451c0b6c51c"
+  integrity sha512-oSnLIbaOi9CK6ksuZLxVfIs95wzG0gxjch0Mu0P/ViwLj5gvqmd2iy0e6NYluiEOCeUIFdyE9oR9kLKwDa++dw==
+
 "@types/json-schema@^7.0.12":
   version "7.0.12"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
@@ -1087,6 +1092,11 @@ emoji-regex@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
   integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+
+encodeurl@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-2.0.0.tgz#7b8ea898077d7e409d3ac45474ea38eaf0857a58"
+  integrity sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==
 
 esbuild@^0.18.10:
   version "0.18.20"
