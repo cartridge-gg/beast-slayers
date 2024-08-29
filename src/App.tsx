@@ -139,6 +139,14 @@ function App() {
       <div className="card">
         <button onClick={openConnectionPage}>Connect</button>
       </div>
+      <div className="card">
+        <button onClick={() => {
+          storage.delete("sessionSigner");
+          storage.delete("account");
+          setSessionSigner(undefined);
+          setAccountStorage(undefined);
+        }}>Clear session and account</button>
+      </div>
       <div className="card">{JSON.stringify(sessionSigner)}</div>
       <div className="card">{JSON.stringify(accountStorage)}</div>
     </>
