@@ -5,9 +5,9 @@ import { useAccount, AccountProvider } from "./hooks/useAccount";
 import { Button } from "./components/ui/button";
 import toast from "react-hot-toast";
 import useSound from "use-sound";
-import crySoundFile from "./../public/sfx/cry.mp3";
-import nooSoundFile from "./../public/sfx/noo.mp3";
-import pssSoundFile from "./../public/sfx/pss.mp3";
+import crySoundFile from "./assets/sfx/cry.mp3";
+import nooSoundFile from "./assets/sfx/noo.mp3";
+import pssSoundFile from "./assets/sfx/pss.mp3";
 import { createClient, ToriiClient } from "@dojoengine/torii-wasm";
 import {
   ACTIONS_ADDRESS,
@@ -40,7 +40,10 @@ function AppContent() {
     }).then(setClient);
   }, []);
 
-  const [beast, setBeast] = useState<Beast>();
+  const [beast, setBeast] = useState<Beast>({
+    health: 100,
+    level: 1,
+  });
   useEffect(() => {
     if (!client) return;
 
