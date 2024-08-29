@@ -316,9 +316,9 @@ function App() {
             Clear session and account
           </button>
         </div>
-        <div className="card">{JSON.stringify(sessionSigner)}</div>
-        <div className="card">{JSON.stringify(accountStorage)}</div>
-        <div className="card">{JSON.stringify(initData?.startParam)}</div>
+        <div className="card">session:{JSON.stringify(sessionSigner)}</div>
+        <div className="card">account:{JSON.stringify(accountStorage)}</div>
+        <div className="card">initdata:{JSON.stringify(initData?.startParam)}</div>
       </div>
     </div>
   );
