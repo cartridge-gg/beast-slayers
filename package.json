@@ -10,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cartridge-gg/account-wasm": "github:cartridge-gg/controller",
-    "@cartridge/account-wasm": "^0.3.43",
+    "@cartridge/account-wasm": "github:cartridge-gg/controller",
     "@cartridge/connector": "^0.3.43",
     "@cartridge/controller": "^0.3.43",
     "@dojoengine/torii-wasm": "^1.0.0-alpha.8",

@@ -5,12 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@cartridge-gg/account-wasm':
+  '@cartridge/account-wasm':
     specifier: github:cartridge-gg/controller
     version: github.com/cartridge-gg/controller/c7fce07c48c56bc7e6a56023337a343009c51ee6
-  '@cartridge/account-wasm':
-    specifier: ^0.3.43
-    version: 0.3.43
   '@cartridge/connector':
     specifier: ^0.3.43
     version: 0.3.43(get-starknet-core@3.3.3)(react@18.3.1)
@@ -350,10 +347,6 @@ packages:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
     dev: true
-
-  /@cartridge/account-wasm@0.3.43:
-    resolution: {integrity: sha512-7ADG32OlV+spkeMPS4ZypCw3biHzjVTaGSA8VIs6hRr52N2Hc0RrhXz9hX9jZQBAXVz+PWgPQSp7j6DquW6AAg==}
-    dev: false
 
   /@cartridge/connector@0.3.43(get-starknet-core@3.3.3)(react@18.3.1):
     resolution: {integrity: sha512-RU8IxFu2NG3fta0zddT/+82Bv1MyYQ92Z1XDwvj7WRCXGV2MdCwu8+etou7uCdwFkkZ3kiT1EB41ky6umVaOgg==}
