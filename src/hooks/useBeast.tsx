@@ -1,5 +1,5 @@
 import { ToriiClient } from '@dojoengine/torii-wasm';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export interface Beast {
   health: number;
@@ -8,6 +8,7 @@ export interface Beast {
 
 export function useBeast(client?: ToriiClient) {
   const [beast, setBeast] = useState<Beast>({ health: 100, level: 1 });
+  const subscription = useRef<any>();
 
   useEffect(() => {
     if (!client) return;
@@ -35,7 +36,7 @@ export function useBeast(client?: ToriiClient) {
       const game = Object.values(entities)[0]["beastslayers-Game"];
       updateBeast(game);
 
-      client.onEntityUpdated([{HashedKeys: Object.keys(entities)}], (entity) => {
+      subscription.current = client.onEntityUpdated([{HashedKeys: Object.keys(entities)}], (entity) => {
         const updatedGame = entity["beastslayers-Game"];
         updateBeast(updatedGame);
       });
