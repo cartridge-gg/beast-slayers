@@ -2,12 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'SuperBoys';
-  src: url('../public/fonts/SuperBoys-vmW67.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
 
 @layer base {
   :root {
@@ -67,10 +62,17 @@
 }
 
 @layer base {
+  @font-face {
+    font-family: 'SuperBoys';
+    src: url('../public/fonts/SuperBoys-vmW67.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
     @apply border-border;
   }
-  body {
+  html {
     @apply bg-background text-foreground;
     font-family: 'SuperBoys', sans-serif;
     color: #fff;
