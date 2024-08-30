@@ -28,8 +28,6 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         },
       });
 
-      console.log(entities);
-
       if (Object.keys(entities).length === 0) {
         return;
       }
@@ -61,7 +59,11 @@ export function useWarrior(client?: ToriiClient, address?: string) {
       }
 
       client.onEntityUpdated(
-        [{ HashedKeys: Object.keys(entities) }],
+        [{ Keys: {
+          keys: [address],
+          models: ["beastslayers-Warrior"],
+          pattern_matching: "FixedLen",
+        } }],
         (entity) => {
           const updatedWarrior = entity["beastslayers-Warrior"];
           console.log(updatedWarrior);
