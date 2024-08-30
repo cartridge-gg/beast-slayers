@@ -43,10 +43,12 @@ export function useWarrior(client?: ToriiClient, address?: string) {
 
           if (mappedWarrior.level > (oldWarrior?.level || 0)) {
             toast.success(`Leveled up! ${mappedWarrior.level}`);
+            console.log("Leveled up!");
           }
 
           if (mappedWarrior.score > (oldWarrior?.score || 0)) {
             toast.success(`+${mappedWarrior.score - oldWarrior?.score}`);
+            console.log("Score updated!");
           }
 
           return mappedWarrior;
