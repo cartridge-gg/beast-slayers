@@ -16,6 +16,7 @@ import {
   TORII_URL,
   WORLD_ADDRESS,
 } from "./constants";
+import { useViewport } from "@telegram-apps/sdk-react";
 
 interface Beast {
   health: number;
@@ -23,6 +24,11 @@ interface Beast {
 }
 
 function AppContent() {
+  const viewport = useViewport();
+  useEffect(() => {
+    viewport.expand();
+  }, [viewport]);
+
   const { account, openConnectionPage } = useAccount();
   const [particles, setParticles] = useState([]);
   const [burstParticles, setBurstParticles] = useState([]);
