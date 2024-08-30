@@ -5,7 +5,7 @@ import "./index.css";
 
 import { SDKProvider } from "@telegram-apps/sdk-react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Toaster } from "./components/ui/toaster.tsx";
+import { Toaster } from "sonner";
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
