@@ -193,7 +193,7 @@ function AppContent() {
         </Button>
         <div>
           <h1 className="text-white text-center mb-5 text-6xl">
-            Beast Slayers
+            Hit Thing
           </h1>
         </div>
         <motion.div
