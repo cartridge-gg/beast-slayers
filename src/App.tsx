@@ -177,7 +177,7 @@ function AppContent() {
           animate={imageControls}
         >
           <motion.img
-            src={`/beast-${Math.min(Math.floor((beast.level - 1) / 10) + 1, 5)}.png`}
+            src={`/image.png`}
             alt={`Level ${beast.level} Beast`}
             className="max-h-full max-w-full object-contain"
             style={{
