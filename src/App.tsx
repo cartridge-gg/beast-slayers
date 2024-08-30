@@ -108,7 +108,10 @@ function AppContent() {
   };
 
   const handleImageClick = async (event) => {
-    if (!account) return;
+    if (!account) {
+      openConnectionPage();
+      return;
+    }
 
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
