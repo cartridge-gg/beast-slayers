@@ -10,7 +10,7 @@ export interface Warrior {
 }
 
 export function useWarrior(client?: ToriiClient, address?: string) {
-  const [warrior, setWarrior] = useState<Warrior | null>(null);
+  const [warrior, setWarrior] = useState<Warrior | undefined>();
 
   useEffect(() => {
     if (!client || !address) return;
@@ -27,6 +27,8 @@ export function useWarrior(client?: ToriiClient, address?: string) {
           },
         },
       });
+
+      console.log(entities);
 
       if (Object.keys(entities).length === 0) {
         return;
