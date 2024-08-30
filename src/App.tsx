@@ -156,12 +156,7 @@ function AppContent() {
         },
       ]);
   
-      // Toast a formatted substring of the transaction hash
-      const formattedHash = `${tx.slice(0, 6)}...${tx.slice(-6)}`;
-      toast.success(`Transaction sent: ${formattedHash}`, {
-        duration: 5000,
-        position: "bottom-center",
-      });
+      toast(`Tx sent: ${tx.substring(-6)}`);
     } catch (error) {
       if (error.toString().includes("session/not-registered")) {
         openConnectionPage();
