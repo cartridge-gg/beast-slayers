@@ -10,6 +10,7 @@ module.exports = {
   prefix: "",
   theme: {
     fontFamily: {
+      sans: ["SuperBoys", "sans-serif"],
       display: ["SuperBoys", "sans-serif"],
       body: ["SuperBoys", "sans-serif"],
     },
