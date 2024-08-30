@@ -221,6 +221,7 @@ function AppContent() {
           <Button
             className="bg-white text-black text-3xl py-8 hover:bg-white hover:text-black transition-all"
             onClick={openConnectionPage}
+            disabled={!!account}
           >
             <span className="hover:scale-125 transition-all">
               {!account ? "Connect" : `${beast.health}HP`}
