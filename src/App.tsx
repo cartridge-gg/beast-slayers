@@ -16,12 +16,9 @@ import {
   WORLD_ADDRESS,
 } from "./constants";
 import { useViewport } from "@telegram-apps/sdk-react";
-import { toast } from "sonner";
-
-interface Beast {
-  health: number;
-  level: number;
-}
+// import { toast } from "sonner";
+import { useBeast } from "./hooks/useBeast";
+import { useWarrior } from "./hooks/useWarrior";
 
 function AppContent() {
   const viewport = useViewport();
@@ -29,13 +26,13 @@ function AppContent() {
     viewport?.expand();
   }, [viewport]);
 
-  const { account, openConnectionPage } = useAccount();
+  const { account, openConnectionPage, address } = useAccount();
   const [particles, setParticles] = useState([]);
   const [burstParticles, setBurstParticles] = useState([]);
   const imageControls = useAnimation();
   const animationRef = useRef<number>();
 
-  const [client, setClient] = useState<ToriiClient>();
+  const [client, setClient] = useState<ToriiClient | undefined>();
 
   useEffect(() => {
     createClient({
@@ -46,33 +43,8 @@ function AppContent() {
     }).then(setClient);
   }, []);
 
-  const [beast, setBeast] = useState<Beast>({
-    health: 100,
-    level: 1,
-  });
-  useEffect(() => {
-    if (!client) return;
-
-    client
-      .getEntities({
-        limit: 1,
-        offset: 0,
-        clause: {
-          Keys: {
-            keys: [undefined],
-            models: ["beastslayers-Game"],
-            pattern_matching: "FixedLen",
-          },
-        },
-      })
-      .then((entities) => {
-        const game = Object.values(entities)[0]["beastslayers-Game"];
-        setBeast({
-          health: (game.current_beast.value as any).get("health").value,
-          level: (game.current_beast.value as any).get("level").value,
-        });
-      });
-  }, [client]);
+  const beast = useBeast(client);
+  useWarrior(client, address);
 
   useEffect(() => {
     const createParticle = () => ({
@@ -148,15 +120,13 @@ function AppContent() {
     playRandomSound();
 
     try {
-      const tx = await account?.execute([
+      await account?.execute([
         {
           calldata: [],
           entrypoint: "attack",
           contractAddress: ACTIONS_ADDRESS,
         },
       ]);
-  
-      toast(`Tx sent: ${tx.substring(-6)}`);
     } catch (error) {
       if (error.toString().includes("session/not-registered")) {
         openConnectionPage();

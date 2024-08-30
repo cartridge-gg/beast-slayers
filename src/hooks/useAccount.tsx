@@ -23,6 +23,7 @@ interface AccountContextType {
   account: CartridgeSessionAccount | undefined;
   openConnectionPage: () => void;
   clearSession: () => void;
+  address: string | undefined;
 }
 
 if (!window?.['Telegram']) {
@@ -138,6 +139,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
     account,
     openConnectionPage,
     clearSession,
+    address: accountStorage?.address,
   };
 
   return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>;
