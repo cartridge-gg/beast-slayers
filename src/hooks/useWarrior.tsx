@@ -28,6 +28,10 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         },
       });
 
+      if (Object.keys(entities).length === 0) {
+        return;
+      }
+
       const updateWarrior = (warriorData: any) => {
         setWarrior(oldWarrior => {
           if (warriorData.level.value > oldWarrior?.level) {
@@ -37,7 +41,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
           if (warriorData.score.value > oldWarrior?.score) {
             toast.success(`+${warriorData.score.value - oldWarrior?.score}`);
           }
-          
+
           return {
             address: warriorData.address.value,
             level: warriorData.level.value,
