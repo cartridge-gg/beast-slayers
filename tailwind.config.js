@@ -9,6 +9,10 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      display: ["SuperBoys", "sans-serif"],
+      body: ["SuperBoys", "sans-serif"],
+    },
     container: {
       center: true,
       padding: "2rem",
