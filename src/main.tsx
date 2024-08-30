@@ -37,7 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<App />} />
         </Routes>
       </Router>
-      <ToasterWithMax position='bottom-center' max={1} />
+      <ToasterWithMax position='top-center' max={1} />
     </SDKProvider>
   </React.StrictMode>
 );
