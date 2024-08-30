@@ -63,7 +63,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         [{ HashedKeys: Object.keys(entities) }],
         (entity) => {
           const updatedWarrior = entity["beastslayers-Warrior"];
-          console.log(updatedWarrior);
+          console.log(entity);
           if (updatedWarrior) {
             updateWarrior(updatedWarrior);
           }
