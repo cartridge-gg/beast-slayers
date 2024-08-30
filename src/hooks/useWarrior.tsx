@@ -1,6 +1,6 @@
-import { ToriiClient } from '@dojoengine/torii-wasm';
-import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
+import { ToriiClient } from "@dojoengine/torii-wasm";
+import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 export interface Warrior {
   address: string;
@@ -33,21 +33,23 @@ export function useWarrior(client?: ToriiClient, address?: string) {
       }
 
       const updateWarrior = (warriorData: any) => {
-        setWarrior(oldWarrior => {
-          if (warriorData.level.value > oldWarrior?.level) {
-            toast.success(`New level: ${warriorData.level.value}`);
-          }
-
-          if (warriorData.score.value > oldWarrior?.score) {
-            toast.success(`+${warriorData.score.value - oldWarrior?.score}`);
-          }
-
-          return {
+        setWarrior((oldWarrior) => {
+          const mappedWarrior = {
             address: warriorData.address.value,
             level: warriorData.level.value,
             last_mega_attack: warriorData.last_mega_attack.value,
             score: warriorData.score.value,
+          };
+
+          if (mappedWarrior.level > (oldWarrior?.level || 0)) {
+            toast.success(`Leveled up! ${mappedWarrior.level}`);
           }
+
+          if (mappedWarrior.score > (oldWarrior?.score || 0)) {
+            toast.success(`+${mappedWarrior.score - oldWarrior?.score}`);
+          }
+
+          return mappedWarrior;
         });
       };
 
@@ -56,12 +58,15 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         updateWarrior(warriorEntity);
       }
 
-      client.onEntityUpdated([{HashedKeys: Object.keys(entities)}], (entity) => {
-        const updatedWarrior = entity["beastslayers-Warrior"];
-        if (updatedWarrior) {
-          updateWarrior(updatedWarrior);
+      client.onEntityUpdated(
+        [{ HashedKeys: Object.keys(entities) }],
+        (entity) => {
+          const updatedWarrior = entity["beastslayers-Warrior"];
+          if (updatedWarrior) {
+            updateWarrior(updatedWarrior);
+          }
         }
-      });
+      );
     };
 
     fetchWarrior();
