@@ -147,20 +147,26 @@ function AppContent() {
 
     playRandomSound();
 
-    const tx = await account?.execute([
-      {
-        calldata: [],
-        entrypoint: "attack",
-        contractAddress: ACTIONS_ADDRESS,
-      },
-    ]);
-
-    // Toast a formatted substring of the transaction hash
-    const formattedHash = `${tx.slice(0, 6)}...${tx.slice(-6)}`;
-    toast.success(`Transaction sent: ${formattedHash}`, {
-      duration: 5000,
-      position: "bottom-center",
-    });
+    try {
+      const tx = await account?.execute([
+        {
+          calldata: [],
+          entrypoint: "attack",
+          contractAddress: ACTIONS_ADDRESS,
+        },
+      ]);
+  
+      // Toast a formatted substring of the transaction hash
+      const formattedHash = `${tx.slice(0, 6)}...${tx.slice(-6)}`;
+      toast.success(`Transaction sent: ${formattedHash}`, {
+        duration: 5000,
+        position: "bottom-center",
+      });
+    } catch (error) {
+      if (error.toString().includes("session/not-registered")) {
+        openConnectionPage();
+      }
+    }
   };
 
   return (
