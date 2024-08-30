@@ -1,5 +1,5 @@
-import { ToriiClient } from '@dojoengine/torii-wasm';
-import { useState, useEffect, useRef } from 'react';
+import { ToriiClient } from "@dojoengine/torii-wasm";
+import { useState, useEffect, useRef } from "react";
 
 export interface Beast {
   health: number;
@@ -19,7 +19,7 @@ export function useBeast(client?: ToriiClient) {
         offset: 0,
         clause: {
           Keys: {
-            keys: ['0xfea4'],
+            keys: ["0xfea4"],
             models: ["beastslayers-Game"],
             pattern_matching: "FixedLen",
           },
@@ -36,10 +36,13 @@ export function useBeast(client?: ToriiClient) {
       const game = Object.values(entities)[0]["beastslayers-Game"];
       updateBeast(game);
 
-      subscription.current = client.onEntityUpdated([{HashedKeys: Object.keys(entities)}], (entity) => {
-        const updatedGame = entity["beastslayers-Game"];
-        updateBeast(updatedGame);
-      });
+      subscription.current = await client.onEntityUpdated(
+        [{ HashedKeys: Object.keys(entities) }],
+        (entity) => {
+          const updatedGame = entity["beastslayers-Game"];
+          updateBeast(updatedGame);
+        }
+      );
     };
 
     fetchBeast();

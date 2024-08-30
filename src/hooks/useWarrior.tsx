@@ -42,8 +42,6 @@ export function useWarrior(client?: ToriiClient, address?: string) {
             score: warriorData.score.value,
           };
 
-          console.log(mappedWarrior);
-
           if (mappedWarrior.level > (oldWarrior?.level || 0)) {
             toast.success(`Leveled up! ${mappedWarrior.level}`);
           }
@@ -61,7 +59,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         updateWarrior(warriorEntity);
       }
 
-      subscription.current = client.onEntityUpdated(
+      subscription.current = await client.onEntityUpdated(
         [{ HashedKeys: Object.keys(entities) }],
         (entity) => {
           const updatedWarrior = entity["beastslayers-Warrior"];
