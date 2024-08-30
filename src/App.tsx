@@ -141,11 +141,11 @@ function AppContent() {
         },
       ]);
     } catch (error) {
-      if (error.toString().includes("session/not-registered")) {
-        // openConnectionPage();
-      } else {
+      // if (error.toString().includes("session/not-registered")) {
+      //   // openConnectionPage();
+      // } else {
         console.error(error);
-      }
+      // }
     }
   };
 
