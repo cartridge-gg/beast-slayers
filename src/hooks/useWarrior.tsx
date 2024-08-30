@@ -1,5 +1,5 @@
 import { ToriiClient } from "@dojoengine/torii-wasm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
 export interface Warrior {
@@ -11,6 +11,7 @@ export interface Warrior {
 
 export function useWarrior(client?: ToriiClient, address?: string) {
   const [warrior, setWarrior] = useState<Warrior | undefined>();
+  const subscription = useRef<any>();
 
   useEffect(() => {
     if (!client || !address) return;
@@ -58,12 +59,8 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         updateWarrior(warriorEntity);
       }
 
-      client.onEntityUpdated(
-        [{ Keys: {
-          keys: [address],
-          models: ["beastslayers-Warrior"],
-          pattern_matching: "FixedLen",
-        } }],
+      subscription.current = client.onEntityUpdated(
+        [{ HashedKeys: Object.keys(entities) }],
         (entity) => {
           const updatedWarrior = entity["beastslayers-Warrior"];
           console.log(updatedWarrior);
