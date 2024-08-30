@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useAccount, AccountProvider } from "./hooks/useAccount";
 import { Button } from "./components/ui/button";
-import toast from "react-hot-toast";
 import useSound from "use-sound";
 import crySoundFile from "./assets/sfx/cry.mp3";
 import nooSoundFile from "./assets/sfx/noo.mp3";
@@ -17,6 +16,7 @@ import {
   WORLD_ADDRESS,
 } from "./constants";
 import { useViewport } from "@telegram-apps/sdk-react";
+import { toast } from "sonner";
 
 interface Beast {
   health: number;
@@ -26,7 +26,7 @@ interface Beast {
 function AppContent() {
   const viewport = useViewport();
   useEffect(() => {
-    viewport.expand();
+    viewport?.expand();
   }, [viewport]);
 
   const { account, openConnectionPage } = useAccount();
