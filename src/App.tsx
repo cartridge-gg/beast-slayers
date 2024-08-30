@@ -166,14 +166,18 @@ function AppContent() {
           </h1>
         </div>
         <motion.div
-          className="flex justify-center items-center h-1/2 w-full relative"
+          className="flex justify-center items-center h-1/2 w-full relative overflow-hidden"
           onClick={handleImageClick}
           animate={imageControls}
         >
           <motion.img
-            src="/image.png"
-            alt="Beast Slayers"
+            src={`/beast-${Math.min(Math.floor((beast.level - 1) / 10) + 1, 5)}.png`}
+            alt={`Level ${beast.level} Beast`}
             className="max-h-full max-w-full object-contain"
+            style={{
+              width: `${Math.min(100 + (beast.level - 1) * 5, 200)}%`,
+              height: `${Math.min(100 + (beast.level - 1) * 5, 200)}%`,
+            }}
           />
           {burstParticles.map((particle) => (
             <motion.div
@@ -203,7 +207,7 @@ function AppContent() {
             disabled={!!account}
           >
             <span className="hover:scale-125 transition-all">
-              {!account ? "Connect" : `${beast.health}HP`}
+              {!account ? "Connect" : `Level ${beast.level} - ${beast.health}HP`}
             </span>
           </Button>
         </div>

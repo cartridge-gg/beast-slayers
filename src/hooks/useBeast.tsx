@@ -1,5 +1,6 @@
 import { ToriiClient } from "@dojoengine/torii-wasm";
 import { useState, useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
 export interface Beast {
   health: number;
@@ -27,9 +28,18 @@ export function useBeast(client?: ToriiClient) {
       });
 
       const updateBeast = (game: any) => {
-        setBeast({
-          health: game.current_beast.value.get("health").value,
-          level: game.current_beast.value.get("level").value,
+        setBeast(() => {
+          const mappedBeast = {
+            health: game.current_beast.value.get("health").value,
+            level: game.current_beast.value.get("level").value,
+          };
+
+          // if health is 0, show toast
+          if (mappedBeast.health === 0) {
+            toast(`Level ${mappedBeast.level} beast defeated`);
+          }
+
+          return mappedBeast;
         });
       };
 
