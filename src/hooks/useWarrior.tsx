@@ -42,6 +42,8 @@ export function useWarrior(client?: ToriiClient, address?: string) {
             score: warriorData.score.value,
           };
 
+          console.log(mappedWarrior);
+
           if (mappedWarrior.level > (oldWarrior?.level || 0)) {
             toast.success(`Leveled up! ${mappedWarrior.level}`);
           }
