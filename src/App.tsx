@@ -160,16 +160,16 @@ function AppContent() {
         />
       ))}
       <div className="relative z-10 flex flex-col justify-between p-5 h-full">
-        <div className="flex justify-between items-center">
+        <Button
+          className="absolute top-2 right-2 bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
+          onClick={clearSession}
+        >
+          Clear
+        </Button>
+        <div>
           <h1 className="text-white text-center mb-5 text-6xl">
             Beast Slayers
           </h1>
-          <Button
-            className="bg-red-500 text-white text-xl py-2 px-4 hover:bg-red-600 transition-all"
-            onClick={clearSession}
-          >
-            Clear Session
-          </Button>
         </div>
         <motion.div
           className="flex justify-center items-center h-1/2 w-full relative overflow-hidden"
