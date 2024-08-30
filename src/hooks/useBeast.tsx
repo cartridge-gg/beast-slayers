@@ -38,8 +38,8 @@ export function useBeast(client?: ToriiClient) {
 
       subscription.current = await client.onEntityUpdated(
         [{ HashedKeys: Object.keys(entities) }],
-        (entity) => {
-          const updatedGame = entity["beastslayers-Game"];
+        (_hashedKeys, models) => {
+          const updatedGame = models["beastslayers-Game"];
           updateBeast(updatedGame);
         }
       );

@@ -61,9 +61,8 @@ export function useWarrior(client?: ToriiClient, address?: string) {
 
       subscription.current = await client.onEntityUpdated(
         [{ HashedKeys: Object.keys(entities) }],
-        (entity) => {
-          const updatedWarrior = entity["beastslayers-Warrior"];
-          console.log(entity);
+        (_hashedKeys, models) => {
+          const updatedWarrior = models["beastslayers-Warrior"];
           if (updatedWarrior) {
             updateWarrior(updatedWarrior);
           }
