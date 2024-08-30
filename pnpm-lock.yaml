@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@cartridge/account-wasm':
-    specifier: github:cartridge-gg/controller
-    version: github.com/cartridge-gg/controller/c7fce07c48c56bc7e6a56023337a343009c51ee6
   '@cartridge/connector':
     specifier: ^0.3.43
     version: 0.3.43(get-starknet-core@3.3.3)(react@18.3.1)
@@ -3791,11 +3788,4 @@ packages:
 
   /zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
-    dev: false
-
-  github.com/cartridge-gg/controller/c7fce07c48c56bc7e6a56023337a343009c51ee6:
-    resolution: {tarball: https://codeload.github.com/cartridge-gg/controller/tar.gz/c7fce07c48c56bc7e6a56023337a343009c51ee6}
-    name: controller
-    version: 0.0.0
-    requiresBuild: true
     dev: false
