@@ -18,7 +18,7 @@ export function useBeast(client?: ToriiClient) {
         offset: 0,
         clause: {
           Keys: {
-            keys: [undefined],
+            keys: ['0xfea4'],
             models: ["beastslayers-Game"],
             pattern_matching: "FixedLen",
           },
