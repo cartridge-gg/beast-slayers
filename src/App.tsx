@@ -26,7 +26,7 @@ function AppContent() {
     viewport?.expand();
   }, [viewport]);
 
-  const { account, openConnectionPage, address, clearSession } = useAccount();
+  const { account, openConnectionPage, address, clearSession, username } = useAccount();
   const [particles, setParticles] = useState([]);
   const [burstParticles, setBurstParticles] = useState([]);
   const imageControls = useAnimation();
@@ -189,7 +189,7 @@ function AppContent() {
           className="absolute top-2 right-2 bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
           onClick={clearSession}
         >
-          Clear
+          {username}
         </Button>
         <div>
           <h1 className="text-white text-center mb-5 text-6xl">

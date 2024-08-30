@@ -24,6 +24,7 @@ interface AccountContextType {
   openConnectionPage: () => void;
   clearSession: () => void;
   address: string | undefined;
+  username: string | undefined;
 }
 
 if (!window?.['Telegram']) {
@@ -140,6 +141,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
     openConnectionPage,
     clearSession,
     address: accountStorage?.address,
+    username: accountStorage?.username,
   };
 
   return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>;
