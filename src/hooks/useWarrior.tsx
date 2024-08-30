@@ -47,7 +47,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
           }
 
           if (mappedWarrior.score > (oldWarrior?.score || 0)) {
-            toast.success(`+${mappedWarrior.score - oldWarrior?.score}`);
+            toast.success(`New score: ${mappedWarrior.score}`);
           }
 
           return mappedWarrior;
