@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { mockTelegramEnv, useCloudStorage, useLaunchParams, useMiniApp, useUtils } from "@telegram-apps/sdk-react";
-import { CartridgeSessionAccount } from "../account-wasm/account_wasm";
 import * as Dojo from "@dojoengine/torii-wasm";
 import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "../constants";
 import encodeUrl from "encodeurl";
+import { CartridgeSessionAccount } from "@cartridge/account-wasm";
 
 interface AccountStorage {
   username: string;
