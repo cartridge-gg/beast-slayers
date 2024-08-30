@@ -31,6 +31,16 @@ function AppContent() {
   const [burstParticles, setBurstParticles] = useState([]);
   const imageControls = useAnimation();
   const animationRef = useRef<number>();
+  const [isDefeated, setIsDefeated] = useState(false);
+
+  // Add this function to determine the beast's color based on its level
+  const getBeastColor = (level: number) => {
+    if (level <= 2) return "hue-rotate-0";
+    if (level <= 3) return "hue-rotate-60";
+    if (level <= 4) return "hue-rotate-120";
+    if (level <= 5) return "hue-rotate-180";
+    return "hue-rotate-240";
+  };
 
   const [client, setClient] = useState<ToriiClient | undefined>();
 
@@ -136,6 +146,18 @@ function AppContent() {
     }
   };
 
+  useEffect(() => {
+    if (beast.health === 0 && !isDefeated) {
+      setIsDefeated(true);
+      imageControls.start({
+        x: [0, -10, 10, -10, 10, 0],
+        transition: { duration: 0.5, ease: "easeInOut" },
+      }).then(() => {
+        setIsDefeated(false);
+      });
+    }
+  }, [beast.health, imageControls, isDefeated]);
+
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-black">
       {particles.map((particle) => (
@@ -179,7 +201,7 @@ function AppContent() {
           <motion.img
             src={`/image.png`}
             alt={`Level ${beast.level} Beast`}
-            className="max-h-full max-w-full object-contain"
+            className={`max-h-full max-w-full object-contain ${getBeastColor(beast.level)}`}
             style={{
               width: `${Math.min(100 + (beast.level - 1) * 5, 200)}%`,
               height: `${Math.min(100 + (beast.level - 1) * 5, 200)}%`,
