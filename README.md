@@ -58,6 +58,13 @@ The `useAccount` hook provides an easy way to integrate the controller into your
    }
    ```
 
+5. Connecting to the controller
+
+   ```javascript
+   const { openConnectionPage } = useAccount();
+   openConnectionPage();
+   ```
+
 ## Dojo integration
 
 1. We create a Torii client in the main App component:
