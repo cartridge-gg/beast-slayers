@@ -31,7 +31,12 @@ mod actions {
             }
 
             let damage = player.level;
-            game.current_beast.health -= damage;
+            if game.current_beast.health > damage {
+                game.current_beast.health -= damage;
+            } else {
+                game.current_beast.health = 0;
+            }
+
             player.score += game.current_beast.level;
 
             if player.score > (player.level*player.level*player.level) * 5 + 50 {
