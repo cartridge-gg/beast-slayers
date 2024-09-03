@@ -1,6 +1,6 @@
 # Beast Slayers
 
-Beast Slayers is a simple yet addictive game built using Dojo on Telegram, where players click frantically to defeat increasingly powerful beasts. The game integrates the cartridge Controller and the Dojo wasm bindings for syncing with the on-chain game state.
+Beast Slayers is a simple yet addictive game built using Dojo on Telegram, where players need to spam click to defeat increasingly powerful beasts. The game integrates the cartridge Controller and the Dojo wasm bindings for syncing with the on-chain game state.
 
 ## Controller integration
 
