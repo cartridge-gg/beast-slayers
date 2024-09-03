@@ -1,30 +1,112 @@
-<p align="center">
-  <br>
-  <img width="240" src="./src/assets/tapps.png" alt="logo of telegram web apps">
-  <br>
-  <br>
-</p>
+# Beast Slayers
 
-# Telegram Mini Apps(TMA) + React + TypeScript + Vite
+Beast Slayers is a simple yet addictive game built using Dojo on Telegram, where players click frantically to defeat increasingly powerful beasts. The game integrates the cartridge Controller and the Dojo wasm bindings for syncing with the on-chain game state.
 
-Vite (which means "fast" in French) is a front-end build tool and development server that aims to provide a faster and leaner development experience for modern web projects. We will utilise Vite to create Telegram Mini App example.
+## Controller integration
 
-This template provides a minimal setup to get TMA working in Vite with React, TypeScript, HMR and some ESLint rules.
+1. We generate a local Stark key pair for the user and store the private key in Telegrams cloud storage.
+2. We open the session controller page, passing the user's public key.
+3. The controller registers the session public key and returns account information.
+4. We create a controller session account on the client.
+5. We store the account information in Telegrams cloud storage.
 
-## Usage
+## Using the useAccount Hook
 
-```bash
-# npm
-npm install
-npm run dev --host
-```
-```bash
-# yarn
-yarn
-yarn dev --host
-```
+The `useAccount` hook provides an easy way to integrate the controller into your Telegram Mini App.
 
-# Links
-- [Doc](https://docs.ton.org/develop/dapps/twa)
-- [Example TMA](https://t.me/vite_twa_example_bot/app)
-- [Link](https://twa-dev.github.io/vite-boilerplate/)
+1. Import the hook:
+
+   ```javascript
+   import { useAccount } from "./path/to/AccountProvider";
+   ```
+
+2. Use the hook in your component:
+
+   ```javascript
+   function MyComponent() {
+     const {
+       accountStorage,
+       sessionSigner,
+       account,
+       openConnectionPage,
+       clearSession,
+       address,
+       username,
+     } = useAccount();
+
+     // Use the account information and functions as needed
+   }
+   ```
+
+3. Available properties and functions:
+
+   - `accountStorage`: Contains user account information (username, address, ownerGuid)
+   - `sessionSigner`: Contains the session's private and public keys
+   - `account`: The CartridgeSessionAccount instance
+   - `openConnectionPage()`: Function to open the connection page for account setup
+   - `clearSession()`: Function to clear the current session
+   - `address`: The user's account address
+   - `username`: The user's username
+
+4. Ensure your app is wrapped with the AccountProvider:
+
+   ```javascript
+   import { AccountProvider } from "./path/to/AccountProvider";
+
+   function App() {
+     return <AccountProvider>{/* Your app components */}</AccountProvider>;
+   }
+   ```
+
+## Dojo integration
+
+1. We create a Torii client in the main App component:
+
+   ```javascript
+   const [client, setClient] = useState<ToriiClient | undefined>();
+
+   useEffect(() => {
+     createClient({
+       toriiUrl: TORII_URL,
+       rpcUrl: RPC_URL,
+       relayUrl: RELAY_URL,
+       worldAddress: WORLD_ADDRESS,
+     }).then(setClient);
+   }, []);
+   ```
+
+2. We subscribe to our game entities
+
+   ```javascript
+   const entities = await client.getEntities({
+     limit: 1,
+     offset: 0,
+     clause: {
+       Keys: {
+         keys: ["0xfea4"], // or [address] for warrior
+         models: ["beastslayers-Game"], // or ["beastslayers-Warrior"]
+         pattern_matching: "FixedLen",
+       },
+     },
+   });
+
+   subscription.current = await client.onEntityUpdated(
+     [{ HashedKeys: Object.keys(entities) }],
+     (_hashedKeys, models) => {
+       // Update local state based on the new data
+     }
+   );
+   ```
+
+3. We refresh the react state to update the UI
+
+   ```javascript
+   const game = Object.values(entities)[0]["beastslayers-Game"];
+   updateBeast(game);
+   ```
+
+## Running the game
+
+1. Clone the repo
+2. Run `pnpm install`
+3. Run `pnpm run dev`
