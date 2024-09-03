@@ -1,0 +1,208 @@
+[world]
+kind = "WorldContract"
+class_hash = "0xa349b743d361ce4567361475a89b84a386bb383448c6926954e5fe0b525597"
+original_class_hash = "0xa349b743d361ce4567361475a89b84a386bb383448c6926954e5fe0b525597"
+abi = "manifests/dev/deployment/abis/dojo-world.json"
+address = "0x6953345b5aa3ba9be1a16fffbd965c7a88c2611e7b047cc499ac199022a6cf6"
+transaction_hash = "0x433de4fc99c1934d2a127d459270aa8896a2a30572e9323a7d5976e7238af07"
+block_number = 3
+seed = "beastslayers"
+manifest_name = "dojo-world"
+
+[world.metadata]
+profile_name = "dev"
+rpc_url = "http://localhost:5050/"
+
+[base]
+kind = "Class"
+class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+original_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+abi = "manifests/dev/deployment/abis/dojo-base.json"
+tag = "dojo-base"
+manifest_name = "dojo-base"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0x516ba2c0dc41c07b79bf63b01961992a2047ce0b3f0df288dd6c3b7617f79cb"
+class_hash = "0xbb567b483d10d13b6bb48f8797adf83c626ff3277c09c944861bcfe748d85a"
+original_class_hash = "0xbb567b483d10d13b6bb48f8797adf83c626ff3277c09c944861bcfe748d85a"
+base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+abi = "manifests/dev/deployment/abis/contracts/beastslayers-Thing-6a24670b.json"
+reads = []
+writes = [
+    "beastslayers-ERC20MetadataModel",
+    "beastslayers-ERC20BalanceModel",
+    "beastslayers-ERC20AllowanceModel",
+    "beastslayers-ERC20BridgeableModel",
+    "beastslayers-InitializableModel",
+]
+init_calldata = []
+tag = "beastslayers-Thing"
+systems = ["initializer"]
+manifest_name = "beastslayers-Thing-6a24670b"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0xb9c8cde5b4985246760a6fd3e4bc55bcc2f4f80c2a9120697584c690a7104c"
+class_hash = "0x4f9c0001791986594ce1334122d790ad8d753cc310d4a590899718fea1a0f7f"
+original_class_hash = "0x4f9c0001791986594ce1334122d790ad8d753cc310d4a590899718fea1a0f7f"
+base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+abi = "manifests/dev/deployment/abis/contracts/beastslayers-actions-35befdaf.json"
+reads = []
+writes = [
+    "beastslayers-Warrior",
+    "beastslayers-Game",
+    "beastslayers-ERC20MetadataModel",
+    "beastslayers-ERC20BalanceModel",
+    "beastslayers-ERC20AllowanceModel",
+    "beastslayers-ERC20BridgeableModel",
+    "beastslayers-InitializableModel",
+]
+init_calldata = []
+tag = "beastslayers-actions"
+systems = ["attack"]
+manifest_name = "beastslayers-actions-35befdaf"
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x40ccbc054b3ff881d48e4b314a1b28b3b7f7ccc8883aa650e9d71cebd78567e"
+original_class_hash = "0x40ccbc054b3ff881d48e4b314a1b28b3b7f7ccc8883aa650e9d71cebd78567e"
+abi = "manifests/dev/deployment/abis/models/beastslayers-ERC20AllowanceModel-31406127.json"
+tag = "beastslayers-ERC20AllowanceModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_allowance_model"
+manifest_name = "beastslayers-ERC20AllowanceModel-31406127"
+
+[[models.members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "owner"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "spender"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "amount"
+type = "u256"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
+original_class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
+abi = "manifests/dev/deployment/abis/models/beastslayers-ERC20BalanceModel-48c68ab0.json"
+tag = "beastslayers-ERC20BalanceModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_balance_model"
+manifest_name = "beastslayers-ERC20BalanceModel-48c68ab0"
+
+[[models.members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "account"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "amount"
+type = "u256"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x205a8f6947a86db980b6a4ccb99f989fe19f6e6571c4370f71fc8e48ecd42d"
+original_class_hash = "0x205a8f6947a86db980b6a4ccb99f989fe19f6e6571c4370f71fc8e48ecd42d"
+abi = "manifests/dev/deployment/abis/models/beastslayers-ERC20BridgeableModel-6f4b0626.json"
+tag = "beastslayers-ERC20BridgeableModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_bridgeable_model"
+manifest_name = "beastslayers-ERC20BridgeableModel-6f4b0626"
+
+[[models.members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "l2_bridge_address"
+type = "ContractAddress"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x5f989f1870f762d1d3beba9233c5b425b78b8ea323469242b7f6277232f6499"
+original_class_hash = "0x5f989f1870f762d1d3beba9233c5b425b78b8ea323469242b7f6277232f6499"
+abi = "manifests/dev/deployment/abis/models/beastslayers-ERC20MetadataModel-bd958e58.json"
+tag = "beastslayers-ERC20MetadataModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_metadata_model"
+manifest_name = "beastslayers-ERC20MetadataModel-bd958e58"
+
+[[models.members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "name"
+type = "ByteArray"
+key = false
+
+[[models.members]]
+name = "symbol"
+type = "ByteArray"
+key = false
+
+[[models.members]]
+name = "decimals"
+type = "u8"
+key = false
+
+[[models.members]]
+name = "total_supply"
+type = "u256"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x1abebea2e4b03680a65489f59a101ebb1becf3111d19b2597443323883d9c3c"
+original_class_hash = "0x1abebea2e4b03680a65489f59a101ebb1becf3111d19b2597443323883d9c3c"
+abi = "manifests/dev/deployment/abis/models/beastslayers-Game-28ba25af.json"
+tag = "beastslayers-Game"
+qualified_path = "beastslayers::models::game"
+manifest_name = "beastslayers-Game-28ba25af"
+
+[[models.members]]
+name = "id"
+type = "u32"
+key = true
+
+[[models.members]]
+name = "current_beast"
+type = "Beast"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
+original_class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
+abi = "manifests/dev/deployment/abis/models/beastslayers-Warrior-60be6cf8.json"
+tag = "beastslayers-Warrior"
+qualified_path = "beastslayers::models::warrior"
+manifest_name = "beastslayers-Warrior-60be6cf8"
+
+[[models.members]]
+name = "address"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "level"
+type = "u32"
+key = false

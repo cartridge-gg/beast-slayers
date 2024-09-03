@@ -59,6 +59,8 @@ mod actions {
             thing.mint(player_address, player.level.into());
             let player_score = thing.balance_of(player_address);
 
+            println!("player_score: {}", player_score);
+
             if player_score > ((player.level*player.level*player.level) * 5 + 50).into() {
                 player.level += 1;
             }

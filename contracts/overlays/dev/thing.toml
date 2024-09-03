@@ -1,7 +1,5 @@
-tag = "beastslayers-actions"
+tag = "beastslayers-Thing"
 writes = [
-    "beastslayers-Warrior",
-    "beastslayers-Game",
     "beastslayers-ERC20MetadataModel",
     "beastslayers-ERC20BalanceModel",
     "beastslayers-ERC20AllowanceModel",
