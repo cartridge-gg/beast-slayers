@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x90e6edf16d1b4425bf1886e6a043cf6b5aebe211a4e05b935e90c85da3b062"
-original_class_hash = "0x90e6edf16d1b4425bf1886e6a043cf6b5aebe211a4e05b935e90c85da3b062"
+class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
+original_class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
 abi = "manifests/dev/base/abis/models/beastslayers-Warrior-60be6cf8.json"
 tag = "beastslayers-Warrior"
 qualified_path = "beastslayers::models::warrior"
@@ -13,15 +13,5 @@ key = true
 
 [[members]]
 name = "level"
-type = "u32"
-key = false
-
-[[members]]
-name = "last_mega_attack"
-type = "u64"
-key = false
-
-[[members]]
-name = "score"
 type = "u32"
 key = false

@@ -363,26 +363,26 @@
   },
   {
     "type": "impl",
-    "name": "warriorImpl",
-    "interface_name": "beastslayers::models::Iwarrior"
+    "name": "erc_20_bridgeable_modelImpl",
+    "interface_name": "beastslayers::tokens::thing::Ierc_20_bridgeable_model"
   },
   {
     "type": "struct",
-    "name": "beastslayers::models::Warrior",
+    "name": "beastslayers::tokens::thing::ERC20BridgeableModel",
     "members": [
       {
-        "name": "address",
+        "name": "token",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "level",
-        "type": "core::integer::u32"
+        "name": "l2_bridge_address",
+        "type": "core::starknet::contract_address::ContractAddress"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "beastslayers::models::Iwarrior",
+    "name": "beastslayers::tokens::thing::Ierc_20_bridgeable_model",
     "items": [
       {
         "type": "function",
@@ -390,7 +390,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "beastslayers::models::Warrior"
+            "type": "beastslayers::tokens::thing::ERC20BridgeableModel"
           }
         ],
         "outputs": [],
@@ -400,7 +400,7 @@
   },
   {
     "type": "event",
-    "name": "beastslayers::models::warrior::Event",
+    "name": "beastslayers::tokens::thing::erc_20_bridgeable_model::Event",
     "kind": "enum",
     "variants": []
   }

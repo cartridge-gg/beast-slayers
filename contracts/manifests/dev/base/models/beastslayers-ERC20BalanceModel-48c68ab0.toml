@@ -1,0 +1,22 @@
+kind = "DojoModel"
+class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
+original_class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
+abi = "manifests/dev/base/abis/models/beastslayers-ERC20BalanceModel-48c68ab0.json"
+tag = "beastslayers-ERC20BalanceModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_balance_model"
+manifest_name = "beastslayers-ERC20BalanceModel-48c68ab0"
+
+[[members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "account"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "amount"
+type = "u256"
+key = false

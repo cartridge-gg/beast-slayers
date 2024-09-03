@@ -363,40 +363,44 @@
   },
   {
     "type": "impl",
-    "name": "gameImpl",
-    "interface_name": "beastslayers::models::Igame"
+    "name": "erc_20_balance_modelImpl",
+    "interface_name": "beastslayers::tokens::thing::Ierc_20_balance_model"
   },
   {
     "type": "struct",
-    "name": "beastslayers::models::Beast",
+    "name": "core::integer::u256",
     "members": [
       {
-        "name": "level",
-        "type": "core::integer::u32"
+        "name": "low",
+        "type": "core::integer::u128"
       },
       {
-        "name": "health",
-        "type": "core::integer::u32"
+        "name": "high",
+        "type": "core::integer::u128"
       }
     ]
   },
   {
     "type": "struct",
-    "name": "beastslayers::models::Game",
+    "name": "beastslayers::tokens::thing::ERC20BalanceModel",
     "members": [
       {
-        "name": "id",
-        "type": "core::integer::u32"
+        "name": "token",
+        "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "current_beast",
-        "type": "beastslayers::models::Beast"
+        "name": "account",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "amount",
+        "type": "core::integer::u256"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "beastslayers::models::Igame",
+    "name": "beastslayers::tokens::thing::Ierc_20_balance_model",
     "items": [
       {
         "type": "function",
@@ -404,7 +408,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "beastslayers::models::Game"
+            "type": "beastslayers::tokens::thing::ERC20BalanceModel"
           }
         ],
         "outputs": [],
@@ -414,7 +418,7 @@
   },
   {
     "type": "event",
-    "name": "beastslayers::models::game::Event",
+    "name": "beastslayers::tokens::thing::erc_20_balance_model::Event",
     "kind": "enum",
     "variants": []
   }

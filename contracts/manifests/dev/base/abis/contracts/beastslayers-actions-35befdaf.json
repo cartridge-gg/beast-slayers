@@ -159,13 +159,6 @@
         "inputs": [],
         "outputs": [],
         "state_mutability": "external"
-      },
-      {
-        "type": "function",
-        "name": "mega_attack",
-        "inputs": [],
-        "outputs": [],
-        "state_mutability": "external"
       }
     ]
   },

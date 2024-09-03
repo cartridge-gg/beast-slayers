@@ -1,14 +1,11 @@
 kind = "DojoContract"
-class_hash = "0x44a706d56bd8d7de2bd590c116147ebf783753131301833eb0ebb07274c7a0a"
-original_class_hash = "0x44a706d56bd8d7de2bd590c116147ebf783753131301833eb0ebb07274c7a0a"
+class_hash = "0x20692898e0d96a3144ec80e882fc675b15b0616bb728fe30c34f57770edd81"
+original_class_hash = "0x20692898e0d96a3144ec80e882fc675b15b0616bb728fe30c34f57770edd81"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/beastslayers-actions-35befdaf.json"
 reads = []
 writes = []
 init_calldata = []
 tag = "beastslayers-actions"
-systems = [
-    "attack",
-    "mega_attack",
-]
+systems = ["attack"]
 manifest_name = "beastslayers-actions-35befdaf"

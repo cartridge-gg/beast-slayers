@@ -1,0 +1,17 @@
+kind = "DojoModel"
+class_hash = "0x205a8f6947a86db980b6a4ccb99f989fe19f6e6571c4370f71fc8e48ecd42d"
+original_class_hash = "0x205a8f6947a86db980b6a4ccb99f989fe19f6e6571c4370f71fc8e48ecd42d"
+abi = "manifests/dev/base/abis/models/beastslayers-ERC20BridgeableModel-6f4b0626.json"
+tag = "beastslayers-ERC20BridgeableModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_bridgeable_model"
+manifest_name = "beastslayers-ERC20BridgeableModel-6f4b0626"
+
+[[members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "l2_bridge_address"
+type = "ContractAddress"
+key = false

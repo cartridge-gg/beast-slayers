@@ -19,7 +19,5 @@ pub struct Game {
 pub struct Warrior {
     #[key]
     pub address: ContractAddress,
-    pub level: u32,
-    pub last_mega_attack: u64,
-    pub score: u32
+    pub level: u32
 }

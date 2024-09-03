@@ -1,0 +1,27 @@
+kind = "DojoModel"
+class_hash = "0x40ccbc054b3ff881d48e4b314a1b28b3b7f7ccc8883aa650e9d71cebd78567e"
+original_class_hash = "0x40ccbc054b3ff881d48e4b314a1b28b3b7f7ccc8883aa650e9d71cebd78567e"
+abi = "manifests/dev/base/abis/models/beastslayers-ERC20AllowanceModel-31406127.json"
+tag = "beastslayers-ERC20AllowanceModel"
+qualified_path = "beastslayers::tokens::thing::erc_20_allowance_model"
+manifest_name = "beastslayers-ERC20AllowanceModel-31406127"
+
+[[members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "owner"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "spender"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "amount"
+type = "u256"
+key = false
