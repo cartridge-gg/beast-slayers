@@ -20,30 +20,32 @@ import { useViewport } from "@telegram-apps/sdk-react";
 import { useBeast } from "./hooks/useBeast";
 import { useWarrior } from "./hooks/useWarrior";
 
+const getBeastColor = (level: number) => {
+  if (level <= 2) return "hue-rotate-0";
+  if (level <= 3) return "hue-rotate-60";
+  if (level <= 4) return "hue-rotate-120";
+  if (level <= 5) return "hue-rotate-180";
+  return "hue-rotate-240";
+};
+
 function AppContent() {
   const viewport = useViewport();
   useEffect(() => {
     viewport?.expand();
   }, [viewport]);
 
+  // Controller session
   const { account, openConnectionPage, address, clearSession, username } = useAccount();
+  
+  // Game
   const [particles, setParticles] = useState([]);
   const [burstParticles, setBurstParticles] = useState([]);
   const imageControls = useAnimation();
   const animationRef = useRef<number>();
   const [isDefeated, setIsDefeated] = useState(false);
 
-  // Add this function to determine the beast's color based on its level
-  const getBeastColor = (level: number) => {
-    if (level <= 2) return "hue-rotate-0";
-    if (level <= 3) return "hue-rotate-60";
-    if (level <= 4) return "hue-rotate-120";
-    if (level <= 5) return "hue-rotate-180";
-    return "hue-rotate-240";
-  };
-
+  // Create Torii client
   const [client, setClient] = useState<ToriiClient | undefined>();
-
   useEffect(() => {
     createClient({
       toriiUrl: TORII_URL,
@@ -53,9 +55,12 @@ function AppContent() {
     }).then(setClient);
   }, []);
 
+  // Fetch and subscribe to the beast
   const beast = useBeast(client);
+  // Fetch and subscribe to the warrior (current player)
   useWarrior(client, address);
 
+  // Create particles for the background
   useEffect(() => {
     const createParticle = () => ({
       id: Math.random(),
@@ -88,6 +93,7 @@ function AppContent() {
     };
   }, []);
 
+  // Particles when you click
   const createBurstParticle = (x, y) => ({
     id: Math.random(),
     x,
@@ -107,6 +113,7 @@ function AppContent() {
     randomSound();
   };
 
+  // Attack the beast
   const handleImageClick = async (event) => {
     if (!account) {
       openConnectionPage();
@@ -141,6 +148,7 @@ function AppContent() {
         },
       ]);
     } catch (error) {
+      // If the user is not registered, open the connection page
       if (error.toString().includes("session/not-registered")) {
         openConnectionPage();
       } else {
