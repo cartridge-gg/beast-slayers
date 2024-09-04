@@ -198,7 +198,7 @@ function AppContent() {
 
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-black">
-      <div className="absolute top-2 right-2 flex items-center space-x-2">
+      <div className="absolute top-2 right-2 flex items-center space-x-2 z-50">
         {thingBalance && (
           <div className="text-white text-xl font-bold bg-black bg-opacity-50 py-1 px-2 rounded">
             {formatEth(thingBalance.balance)} $THING
@@ -206,10 +206,7 @@ function AppContent() {
         )}
         <Button
           className="bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
-          onClick={(e) => {
-            e.stopPropagation();
-            clearSession();
-          }}
+          onClick={clearSession}
         >
           {username ?? 'CLEAR'}
         </Button>
