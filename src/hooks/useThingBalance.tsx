@@ -1,14 +1,15 @@
 import { ToriiClient } from "@dojoengine/torii-wasm";
 import { useState, useEffect, useRef } from "react";
 
-export interface ThingBalance {
-  address: string;
-  balance: bigint;
-}
-
 export function useThingBalance(client?: ToriiClient, address?: string) {
-  const [balance, setBalance] = useState<ThingBalance | undefined>();
+  const [balance, setBalance] = useState<bigint>(BigInt(0));
   const subscription = useRef<any>();
+
+  const updateBalance = (balanceData: any) => {
+    setBalance(() => {
+      return BigInt(balanceData.balance.value);
+    });
+  };
 
   useEffect(() => {
     if (!client || !address) return;
@@ -30,24 +31,12 @@ export function useThingBalance(client?: ToriiClient, address?: string) {
         return;
       }
 
-      const updateBalance = (balanceData: any) => {
-        setBalance(() => {
-          const mappedBalance = {
-            address: balanceData.address.value,
-            balance: BigInt(balanceData.balance.value),
-          };
+      updateBalance(Object.values(entities)[0]["beastslayers-ERC20BalanceModel"]);
+    };
 
-          return mappedBalance;
-        });
-      };
-
-      const balanceEntity = Object.values(entities)[0]["beastslayers-ERC20BalanceModel"];
-      if (balanceEntity) {
-        updateBalance(balanceEntity);
-      }
-
+    const subscribeToBalance = async () => {
       subscription.current = await client.onEntityUpdated(
-        [{ HashedKeys: Object.keys(entities) }],
+        [{ Keys: { keys: [undefined, address], models: ["beastslayers-ERC20BalanceModel"], pattern_matching: "FixedLen" } }],
         (_hashedKeys, models) => {
           const updatedBalance = models["beastslayers-ERC20BalanceModel"];
           if (updatedBalance) {
@@ -58,12 +47,7 @@ export function useThingBalance(client?: ToriiClient, address?: string) {
     };
 
     fetchBalance();
-
-    return () => {
-      if (subscription.current) {
-        subscription.current.unsubscribe();
-      }
-    };
+    subscribeToBalance();
   }, [client, address]);
 
   return balance;

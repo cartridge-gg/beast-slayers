@@ -10,8 +10,35 @@ export interface Warrior {
 }
 
 export function useWarrior(client?: ToriiClient, address?: string) {
-  const [warrior, setWarrior] = useState<Warrior | undefined>();
+  const [warrior, setWarrior] = useState<Warrior>({
+    address,
+    level: 0,
+    score: 0,
+    unclaimed_tokens: BigInt(0),
+  });
   const subscription = useRef<any>();
+
+
+  const updateWarrior = (warriorData: any) => {
+    setWarrior((oldWarrior) => {
+      const mappedWarrior = {
+        address: warriorData.address.value,
+        level: warriorData.level.value,
+        score: warriorData.score.value,
+        unclaimed_tokens: BigInt(warriorData.unclaimed_tokens.value),
+      };
+
+      if (mappedWarrior.level > (oldWarrior?.level || 0)) {
+        toast(`Leveled up! ${mappedWarrior.level}`);
+      }
+
+      if (mappedWarrior.score > (oldWarrior?.score || 0)) {
+        toast(`New score: ${mappedWarrior.score}`);
+      }
+
+      return mappedWarrior;
+    });
+  };
 
   useEffect(() => {
     if (!client || !address) return;
@@ -33,34 +60,12 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         return;
       }
 
-      const updateWarrior = (warriorData: any) => {
-        setWarrior((oldWarrior) => {
-          const mappedWarrior = {
-            address: warriorData.address.value,
-            level: warriorData.level.value,
-            score: warriorData.score.value,
-            unclaimed_tokens: BigInt(warriorData.unclaimed_tokens.value),
-          };
+      updateWarrior(Object.values(entities)[0]["beastslayers-Warrior"]);
+    };
 
-          if (mappedWarrior.level > (oldWarrior?.level || 0)) {
-            toast(`Leveled up! ${mappedWarrior.level}`);
-          }
-
-          if (mappedWarrior.score > (oldWarrior?.score || 0)) {
-            toast(`New score: ${mappedWarrior.score}`);
-          }
-
-          return mappedWarrior;
-        });
-      };
-
-      const warriorEntity = Object.values(entities)[0]["beastslayers-Warrior"];
-      if (warriorEntity) {
-        updateWarrior(warriorEntity);
-      }
-
+    const subscribeToWarrior = async () => {
       subscription.current = await client.onEntityUpdated(
-        [{ HashedKeys: Object.keys(entities) }],
+        [{ Keys: { keys: [address], models: ["beastslayers-Warrior"], pattern_matching: "FixedLen" } }],
         (_hashedKeys, models) => {
           const updatedWarrior = models["beastslayers-Warrior"];
           if (updatedWarrior) {
@@ -71,6 +76,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
     };
 
     fetchWarrior();
+    subscribeToWarrior();
   }, [client, address]);
 
   return warrior;
