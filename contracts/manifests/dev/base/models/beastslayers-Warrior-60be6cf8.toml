@@ -1,6 +1,6 @@
 kind = "DojoModel"
-class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
-original_class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
+class_hash = "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4"
+original_class_hash = "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4"
 abi = "manifests/dev/base/abis/models/beastslayers-Warrior-60be6cf8.json"
 tag = "beastslayers-Warrior"
 qualified_path = "beastslayers::models::warrior"
@@ -14,4 +14,14 @@ key = true
 [[members]]
 name = "level"
 type = "u32"
+key = false
+
+[[members]]
+name = "score"
+type = "u32"
+key = false
+
+[[members]]
+name = "unclaimed_tokens"
+type = "u256"
 key = false

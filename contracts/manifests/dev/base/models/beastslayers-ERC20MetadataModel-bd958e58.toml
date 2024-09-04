@@ -1,9 +1,9 @@
 kind = "DojoModel"
-class_hash = "0x5f989f1870f762d1d3beba9233c5b425b78b8ea323469242b7f6277232f6499"
-original_class_hash = "0x5f989f1870f762d1d3beba9233c5b425b78b8ea323469242b7f6277232f6499"
+class_hash = "0x498339c7ddaccfde3fa8c03a8584235d019318c63e4bd9b0971f35b031d095a"
+original_class_hash = "0x498339c7ddaccfde3fa8c03a8584235d019318c63e4bd9b0971f35b031d095a"
 abi = "manifests/dev/base/abis/models/beastslayers-ERC20MetadataModel-bd958e58.json"
 tag = "beastslayers-ERC20MetadataModel"
-qualified_path = "beastslayers::tokens::thing::erc_20_metadata_model"
+qualified_path = "origami_token::components::token::erc20::erc20_metadata::erc_20_metadata_model"
 manifest_name = "beastslayers-ERC20MetadataModel-bd958e58"
 
 [[members]]

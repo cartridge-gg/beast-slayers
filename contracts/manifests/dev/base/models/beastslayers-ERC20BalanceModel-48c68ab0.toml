@@ -1,9 +1,9 @@
 kind = "DojoModel"
-class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
-original_class_hash = "0x1dc9752fd8348b967a29be08b7cf61cd6745fb4d2084c551db4b0d4d5143bf5"
+class_hash = "0x132dc763dcacaa091daa816aeb77b5bd9d9fbc9db939f1efa476f4f0ad2c84e"
+original_class_hash = "0x132dc763dcacaa091daa816aeb77b5bd9d9fbc9db939f1efa476f4f0ad2c84e"
 abi = "manifests/dev/base/abis/models/beastslayers-ERC20BalanceModel-48c68ab0.json"
 tag = "beastslayers-ERC20BalanceModel"
-qualified_path = "beastslayers::tokens::thing::erc_20_balance_model"
+qualified_path = "origami_token::components::token::erc20::erc20_balance::erc_20_balance_model"
 manifest_name = "beastslayers-ERC20BalanceModel-48c68ab0"
 
 [[members]]

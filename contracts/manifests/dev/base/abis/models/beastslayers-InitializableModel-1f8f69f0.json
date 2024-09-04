@@ -363,40 +363,40 @@
   },
   {
     "type": "impl",
-    "name": "gameImpl",
-    "interface_name": "beastslayers::models::Igame"
+    "name": "initializable_modelImpl",
+    "interface_name": "origami_token::components::security::initializable::Iinitializable_model"
   },
   {
-    "type": "struct",
-    "name": "beastslayers::models::Beast",
-    "members": [
+    "type": "enum",
+    "name": "core::bool",
+    "variants": [
       {
-        "name": "level",
-        "type": "core::integer::u32"
+        "name": "False",
+        "type": "()"
       },
       {
-        "name": "health",
-        "type": "core::integer::u32"
+        "name": "True",
+        "type": "()"
       }
     ]
   },
   {
     "type": "struct",
-    "name": "beastslayers::models::Game",
+    "name": "origami_token::components::security::initializable::InitializableModel",
     "members": [
       {
-        "name": "id",
-        "type": "core::integer::u32"
+        "name": "token",
+        "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "current_beast",
-        "type": "beastslayers::models::Beast"
+        "name": "initialized",
+        "type": "core::bool"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "beastslayers::models::Igame",
+    "name": "origami_token::components::security::initializable::Iinitializable_model",
     "items": [
       {
         "type": "function",
@@ -404,7 +404,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "beastslayers::models::Game"
+            "type": "origami_token::components::security::initializable::InitializableModel"
           }
         ],
         "outputs": [],
@@ -414,7 +414,7 @@
   },
   {
     "type": "event",
-    "name": "beastslayers::models::game::Event",
+    "name": "origami_token::components::security::initializable::initializable_model::Event",
     "kind": "enum",
     "variants": []
   }

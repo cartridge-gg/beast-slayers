@@ -364,7 +364,7 @@
   {
     "type": "impl",
     "name": "erc_20_balance_modelImpl",
-    "interface_name": "beastslayers::tokens::thing::Ierc_20_balance_model"
+    "interface_name": "origami_token::components::token::erc20::erc20_balance::Ierc_20_balance_model"
   },
   {
     "type": "struct",
@@ -382,7 +382,7 @@
   },
   {
     "type": "struct",
-    "name": "beastslayers::tokens::thing::ERC20BalanceModel",
+    "name": "origami_token::components::token::erc20::erc20_balance::ERC20BalanceModel",
     "members": [
       {
         "name": "token",
@@ -400,7 +400,7 @@
   },
   {
     "type": "interface",
-    "name": "beastslayers::tokens::thing::Ierc_20_balance_model",
+    "name": "origami_token::components::token::erc20::erc20_balance::Ierc_20_balance_model",
     "items": [
       {
         "type": "function",
@@ -408,7 +408,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "beastslayers::tokens::thing::ERC20BalanceModel"
+            "type": "origami_token::components::token::erc20::erc20_balance::ERC20BalanceModel"
           }
         ],
         "outputs": [],
@@ -418,7 +418,7 @@
   },
   {
     "type": "event",
-    "name": "beastslayers::tokens::thing::erc_20_balance_model::Event",
+    "name": "origami_token::components::token::erc20::erc20_balance::erc_20_balance_model::Event",
     "kind": "enum",
     "variants": []
   }

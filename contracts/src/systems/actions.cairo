@@ -2,7 +2,7 @@
 #[dojo::interface]
 trait IActions {
     fn attack(ref world: IWorldDispatcher);
-    // fn mega_attack(ref world: IWorldDispatcher);
+    fn claim_tokens(ref world: IWorldDispatcher);
 }
 
 // dojo decorator
@@ -40,8 +40,6 @@ mod actions {
     impl ActionsImpl of IActions<ContractState> {
         fn attack(ref world: IWorldDispatcher) {
             let mut game = get!(world, 0xfea4, (Game));
-
-            let thing = thing(world);
             let player_address = get_caller_address();
             let mut player = get!(world, player_address, (Warrior));
 
@@ -49,19 +47,30 @@ mod actions {
                 player.level = 1;
             }
 
-            let damage = player.level;
+            let mut damage = player.level;
+            let beast_initial_health = game.current_beast.health;
+            
             if game.current_beast.health > damage {
                 game.current_beast.health -= damage;
             } else {
+                damage = game.current_beast.health;
                 game.current_beast.health = 0;
             }
 
-            thing.mint(player_address, player.level.into());
-            let player_score = thing.balance_of(player_address);
+            // Calculate tokens to award based on damage dealt
+            let total_tokens = 1000 * beast_initial_health;
+            let tokens_to_award = (damage * total_tokens) / beast_initial_health;
 
-            println!("player_score: {}", player_score);
+            // Apply early player bonus (inverse of beast level)
+            let early_player_bonus = 10 / game.current_beast.level;
+            let final_tokens = tokens_to_award * (100 + early_player_bonus) / 100;
 
-            if player_score > ((player.level*player.level*player.level) * 5 + 50).into() {
+            // Update unclaimed tokens
+            player.unclaimed_tokens += final_tokens.into();
+
+            player.score += damage;
+
+            if player.score > ((player.level*player.level*player.level) * 5 + 50) {
                 player.level += 1;
             }
  
@@ -73,36 +82,17 @@ mod actions {
             set!(world, (player, game));
         }
 
-        // fn mega_attack(ref world: IWorldDispatcher) {
-        //     let info = get_block_info();
-            
-        //     let mut game = get!(world, 0xfea4, (Game));
+        fn claim_tokens(ref world: IWorldDispatcher) {
+            let thing = thing(world);
+            let player_address = get_caller_address();
+            let mut player = get!(world, player_address, (Warrior));
 
-        //     let player_address = get_caller_address();
-        //     let mut player = get!(world, player_address, (Warrior));
+            assert!(player.unclaimed_tokens > 0, "No tokens to claim");
 
-        //     if player.level == 0 {
-        //         player.level = 1;
-        //     }
+            thing.mint_from(player_address, player.unclaimed_tokens);
+            player.unclaimed_tokens = 0;
 
-        //     assert!(info.block_timestamp - player.last_mega_attack > 30, "You can only mega attack once per 30 seconds");
-
-        //     let damage = player.level * 10;
-        //     game.current_beast.health -= damage;
-        //     player.score += game.current_beast.level * 10;
-
-        //     if player.score > (player.level*player.level*player.level) * 5 + 50 {
-        //         player.level += 1;
-        //     }
-
-        //     player.last_mega_attack = info.block_timestamp;
-
-        //     if game.current_beast.health <= 0 {
-        //         game.current_beast.level += 1;
-        //         game.current_beast.health = (game.current_beast.level*game.current_beast.level*game.current_beast.level) + 100;
-        //     }
-
-        //     set!(world, (player, game));
-        // }
+            set!(world, (player));
+        }
     }
 }

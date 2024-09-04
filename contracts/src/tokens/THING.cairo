@@ -108,9 +108,9 @@ trait IERC20BridgeableInitializer<TState> {
 
 #[starknet::interface]
 trait IThing<TState> {
-    fn balance_of(self: @TState, account: ContractAddress) -> u256;
-    fn mint(ref self: TState, recipient: ContractAddress, amount: u256);
-    fn burn(ref self: TState, account: ContractAddress, amount: u256);
+    fn balance(self: @TState, account: ContractAddress) -> u256;
+    fn mint_from(ref self: TState, recipient: ContractAddress, amount: u256);
+    fn burn_from(ref self: TState, account: ContractAddress, amount: u256);
 }
 
 #[dojo::contract]
@@ -251,18 +251,18 @@ mod Thing {
         }
     }
 
-    // #[abi(embed_v0)]
-    // impl Thing of super::IThing<ContractState> {
-    //     fn balance_of(self: @ContractState, account: ContractAddress) -> u256 {
-    //         self.erc20_balance.balance_of(account)
-    //     }
+    #[abi(embed_v0)]
+    impl Thing of super::IThing<ContractState> {
+        fn balance(self: @ContractState, account: ContractAddress) -> u256 {
+            self.erc20_balance.balance_of(account)
+        }
 
-    //     fn mint(ref self: ContractState, recipient: ContractAddress, amount: u256) {
-    //         self.erc20_mintable.mint(recipient, amount);
-    //     }
+        fn mint_from(ref self: ContractState, recipient: ContractAddress, amount: u256) {
+            self.erc20_mintable.mint(recipient, amount);
+        }
 
-    //     fn burn(ref self: ContractState, account: ContractAddress, amount: u256) {
-    //         self.erc20_burnable.burn(account, amount);
-    //     }
-    // }
+        fn burn_from(ref self: ContractState, account: ContractAddress, amount: u256) {
+            self.erc20_burnable.burn(account, amount);
+        }
+    }
 }

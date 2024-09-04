@@ -11,7 +11,7 @@ pub struct Beast {
 pub struct Game {
     #[key]
     pub id: u32,
-    pub current_beast: Beast
+    pub current_beast: Beast,
 }
 
 #[derive(Serde, Copy, Drop)]
@@ -19,5 +19,7 @@ pub struct Game {
 pub struct Warrior {
     #[key]
     pub address: ContractAddress,
-    pub level: u32
+    pub level: u32,
+    pub score: u32,
+    pub unclaimed_tokens: u256
 }
