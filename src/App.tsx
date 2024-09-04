@@ -203,7 +203,7 @@ function AppContent() {
       <div className="absolute top-2 right-2 flex items-center space-x-2 z-50">
         {thingBalance && (
           <div className="text-white text-xl font-bold bg-black bg-opacity-50 py-1 px-2 rounded">
-            {formatEth(thingBalance.balance)} $THING
+            {formatEth(thingBalance)} $THING
           </div>
         )}
         <Button
