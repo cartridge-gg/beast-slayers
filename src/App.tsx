@@ -198,20 +198,19 @@ function AppContent() {
 
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-black">
-      {/* Thing Balance display */}
-      {thingBalance && (
-        <div className="absolute top-2 right-2 text-white text-xl font-bold">
-          {formatEth(thingBalance.balance)} $THING
-        </div>
-      )}
-      
-      {/* Clear session button */}
-      <Button
-        className="absolute top-2 left-2 bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
-        onClick={clearSession}
-      >
-        {username ?? 'CLEAR'}
-      </Button>
+      <div className="absolute top-2 right-2 flex items-center space-x-2">
+        {thingBalance && (
+          <div className="text-white text-xl font-bold bg-black bg-opacity-50 py-1 px-2 rounded">
+            {formatEth(thingBalance.balance)} $THING
+          </div>
+        )}
+        <Button
+          className="bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
+          onClick={clearSession}
+        >
+          {username ?? 'CLEAR'}
+        </Button>
+      </div>
 
       {particles.map((particle) => (
         <motion.div
