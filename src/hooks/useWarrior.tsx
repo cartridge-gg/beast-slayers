@@ -26,7 +26,7 @@ export function useWarrior(client?: ToriiClient, address?: string) {
         address: warriorData.address.value,
         level: warriorData.level.value,
         score: warriorData.score.value,
-        unclaimed_tokens: BigInt(warriorData.unclaimed_tokens.value),
+        unclaimed_tokens: BigInt('0x' +warriorData.unclaimed_tokens.value),
       };
 
       if (mappedWarrior.level > (oldWarrior?.level || 0)) {

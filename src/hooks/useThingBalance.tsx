@@ -7,8 +7,7 @@ export function useThingBalance(client?: ToriiClient, address?: string) {
 
   const updateBalance = (balanceData: any) => {
     setBalance(() => {
-      console.log(balanceData);
-      return BigInt(balanceData.balance.value);
+      return BigInt('0x' + balanceData.balance.value);
     });
   };
 
