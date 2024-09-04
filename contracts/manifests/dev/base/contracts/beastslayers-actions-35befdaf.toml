@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x7f730a3fc2f488fe82021805aaa35c9bbc6779fab479bba3b06166047134bdc"
-original_class_hash = "0x7f730a3fc2f488fe82021805aaa35c9bbc6779fab479bba3b06166047134bdc"
+class_hash = "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac"
+original_class_hash = "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/beastslayers-actions-35befdaf.json"
 reads = []
@@ -9,6 +9,6 @@ init_calldata = []
 tag = "beastslayers-actions"
 systems = [
     "attack",
-    "claim_tokens",
+    "claim",
 ]
 manifest_name = "beastslayers-actions-35befdaf"

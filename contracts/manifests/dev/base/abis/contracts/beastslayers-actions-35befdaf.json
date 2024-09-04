@@ -162,7 +162,7 @@
       },
       {
         "type": "function",
-        "name": "claim_tokens",
+        "name": "claim",
         "inputs": [],
         "outputs": [],
         "state_mutability": "external"
