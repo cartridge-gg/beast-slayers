@@ -187,7 +187,8 @@ function AppContent() {
           contractAddress: ACTIONS_ADDRESS,
         },
       ]);
-      // You might want to add a success message here
+      
+      toast.success(`Claimed ${formatEth(warrior.unclaimed_tokens)} $THING`);
     } catch (error) {
       toast.error("Failed to claim tokens");
     }
