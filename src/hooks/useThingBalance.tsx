@@ -19,7 +19,7 @@ export function useThingBalance(client?: ToriiClient, address?: string) {
         offset: 0,
         clause: {
           Keys: {
-            keys: [address],
+            keys: [undefined, address],
             models: ["beastslayers-ERC20BalanceModel"],
             pattern_matching: "FixedLen",
           },
