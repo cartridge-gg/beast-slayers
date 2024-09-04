@@ -1,0 +1,14 @@
+kind = "DojoContract"
+class_hash = "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac"
+original_class_hash = "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac"
+base_class_hash = "0x0"
+abi = "manifests/sepolia/base/abis/contracts/beastslayers-actions-35befdaf.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "beastslayers-actions"
+systems = [
+    "attack",
+    "claim",
+]
+manifest_name = "beastslayers-actions-35befdaf"

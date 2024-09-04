@@ -35,7 +35,7 @@ export function useBeast(client?: ToriiClient) {
           };
 
           // if health is 0, show toast
-          if (mappedBeast.health === 0) {
+          if (mappedBeast.health <= 0) {
             toast(`Level ${mappedBeast.level} beast defeated`);
           }
 

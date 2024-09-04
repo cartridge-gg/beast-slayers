@@ -16,9 +16,10 @@ import {
   WORLD_ADDRESS,
 } from "./constants";
 import { useViewport } from "@telegram-apps/sdk-react";
-// import { toast } from "sonner";
 import { useBeast } from "./hooks/useBeast";
 import { useWarrior } from "./hooks/useWarrior";
+import { useThingBalance } from "./hooks/useThingBalance";
+import toast from "react-hot-toast";
 
 const getBeastColor = (level: number) => {
   if (level <= 2) return "hue-rotate-0";
@@ -57,8 +58,8 @@ function AppContent() {
 
   // Fetch and subscribe to the beast
   const beast = useBeast(client);
-  // Fetch and subscribe to the warrior (current player)
-  useWarrior(client, address);
+  const warrior = useWarrior(client, address);
+  const thingBalance = useThingBalance(client, address);
 
   // Create particles for the background
   useEffect(() => {
@@ -169,8 +170,49 @@ function AppContent() {
     }
   }, [beast.health, imageControls, isDefeated]);
 
+  // Add this new function to handle claiming tokens
+  const handleClaimTokens = async () => {
+    if (!account) {
+      openConnectionPage();
+      return;
+    }
+
+    try {
+      await account.execute([
+        {
+          calldata: [],
+          entrypoint: "claim",
+          contractAddress: ACTIONS_ADDRESS,
+        },
+      ]);
+      // You might want to add a success message here
+    } catch (error) {
+      toast.error("Failed to claim tokens");
+    }
+  };
+
+  const formatEth = (wei: bigint): string => {
+    const eth = Number(wei) / 1e18;
+    return eth.toFixed(4);
+  };
+
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-black">
+      {/* Thing Balance display */}
+      {thingBalance && (
+        <div className="absolute top-2 right-2 text-white text-xl font-bold">
+          {formatEth(thingBalance.balance)} $THING
+        </div>
+      )}
+      
+      {/* Clear session button */}
+      <Button
+        className="absolute top-2 left-2 bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
+        onClick={clearSession}
+      >
+        {username ?? 'CLEAR'}
+      </Button>
+
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
@@ -193,12 +235,6 @@ function AppContent() {
         />
       ))}
       <div className="relative z-10 flex flex-col justify-between p-5 h-full">
-        <Button
-          className="absolute top-2 right-2 bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
-          onClick={clearSession}
-        >
-          {username ?? 'CLEAR'}
-        </Button>
         <div>
           <h1 className="text-white text-center mb-5 text-6xl">
             Hit Thing
@@ -249,6 +285,16 @@ function AppContent() {
               {!account ? "Connect" : `Level ${beast.level} - ${beast.health}HP`}
             </span>
           </Button>
+          {account && warrior && warrior.unclaimed_tokens > 0 && (
+            <Button
+              className="bg-yellow-500 text-black text-2xl py-6 hover:bg-yellow-400 transition-all"
+              onClick={handleClaimTokens}
+            >
+              <span className="hover:scale-110 transition-all">
+                Claim {formatEth(warrior.unclaimed_tokens)} $THING
+              </span>
+            </Button>
+          )}
         </div>
       </div>
     </div>
@@ -264,4 +310,3 @@ function App() {
 }
 
 export default App;
-  

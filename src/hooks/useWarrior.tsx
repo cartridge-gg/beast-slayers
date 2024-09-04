@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 export interface Warrior {
   address: string;
   level: number;
-  last_mega_attack: number;
   score: number;
+  unclaimed_tokens: bigint;
 }
 
 export function useWarrior(client?: ToriiClient, address?: string) {
@@ -38,8 +38,8 @@ export function useWarrior(client?: ToriiClient, address?: string) {
           const mappedWarrior = {
             address: warriorData.address.value,
             level: warriorData.level.value,
-            last_mega_attack: warriorData.last_mega_attack.value,
             score: warriorData.score.value,
+            unclaimed_tokens: BigInt(warriorData.unclaimed_tokens.value),
           };
 
           if (mappedWarrior.level > (oldWarrior?.level || 0)) {

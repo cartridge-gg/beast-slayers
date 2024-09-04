@@ -4,19 +4,19 @@ export const RPC_URL = "https://api.cartridge.gg/x/starknet/sepolia";
 export const KEYCHAIN_URL = "https://x.cartridge.gg";
 export const REDIRECT_URI = "https://t.me/hitthingbot/hitthing";
 export const WORLD_ADDRESS =
-  "0x37c1bb061637b7b264c00658b325d5ef7d4d12bef3850d358f46a27ec60aeb5";
+  "0x240632e5177b1668147c57d2fb775022bebf3d2ed7bf84abf0b90f9a17343ad";
 export const ACTIONS_ADDRESS =
-  "0x05fb7ed5efdb120694ca24b2f07343b8349d99cca58662866d5eda2dbc1e7720";
+  "0x03661Ea5946211b312e8eC71B94550928e8Fd3D3806e43c6d60F41a6c5203645";
 
 export const POLICIES = [
   {
-    target: "0x05fb7ed5efdb120694ca24b2f07343b8349d99cca58662866d5eda2dbc1e7720",
+    target: "0x03661Ea5946211b312e8eC71B94550928e8Fd3D3806e43c6d60F41a6c5203645",
     method: "attack",
     description: "Attack the beast",
   },
   {
-    target: "0x05fb7ed5efdb120694ca24b2f07343b8349d99cca58662866d5eda2dbc1e7720",
-    method: "mega_attack",
-    description: "Mega attack the beast",
+    target: "0x03661Ea5946211b312e8eC71B94550928e8Fd3D3806e43c6d60F41a6c5203645",
+    method: "claim",
+    description: "Claim your tokens",
   },
 ];

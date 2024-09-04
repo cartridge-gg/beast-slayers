@@ -1,0 +1,17 @@
+kind = "DojoModel"
+class_hash = "0x25b92016e2f13f86ddd87dbb28eaf1c7003889e00e58f83d9a08b78783ab1ec"
+original_class_hash = "0x25b92016e2f13f86ddd87dbb28eaf1c7003889e00e58f83d9a08b78783ab1ec"
+abi = "manifests/sepolia/base/abis/models/beastslayers-InitializableModel-1f8f69f0.json"
+tag = "beastslayers-InitializableModel"
+qualified_path = "origami_token::components::security::initializable::initializable_model"
+manifest_name = "beastslayers-InitializableModel-1f8f69f0"
+
+[[members]]
+name = "token"
+type = "ContractAddress"
+key = true
+
+[[members]]
+name = "initialized"
+type = "bool"
+key = false
