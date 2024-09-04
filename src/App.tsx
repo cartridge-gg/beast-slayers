@@ -206,7 +206,10 @@ function AppContent() {
         )}
         <Button
           className="bg-red-500 text-white text-xs py-1 px-2 hover:bg-red-600 transition-all"
-          onClick={clearSession}
+          onClick={(e) => {
+            e.stopPropagation();
+            clearSession();
+          }}
         >
           {username ?? 'CLEAR'}
         </Button>
