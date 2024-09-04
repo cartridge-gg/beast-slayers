@@ -2,7 +2,7 @@
 #[dojo::interface]
 trait IActions {
     fn attack(ref world: IWorldDispatcher);
-    fn claim_tokens(ref world: IWorldDispatcher);
+    fn claim(ref world: IWorldDispatcher);
 }
 
 // dojo decorator
@@ -76,17 +76,10 @@ mod actions {
                 game.current_beast.health = (game.current_beast.level*game.current_beast.level*game.current_beast.level) + 100;
             }
 
-            println!("player.unclaimed_tokens: {}", player.unclaimed_tokens);
-            println!("player.score: {}", player.score);
-            println!("player.level: {}", player.level);
-            println!("game.current_beast.level: {}", game.current_beast.level);
-            println!("game.current_beast.health: {}", game.current_beast.health);
-            println!("damage: {}", damage);
-
             set!(world, (player, game));
         }
 
-        fn claim_tokens(ref world: IWorldDispatcher) {
+        fn claim(ref world: IWorldDispatcher) {
             let thing = thing(world);
             let player_address = get_caller_address();
             let mut player = get!(world, player_address, (Warrior));
