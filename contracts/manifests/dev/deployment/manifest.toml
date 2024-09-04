@@ -48,8 +48,8 @@ manifest_name = "beastslayers-Thing-6a24670b"
 [[contracts]]
 kind = "DojoContract"
 address = "0xb9c8cde5b4985246760a6fd3e4bc55bcc2f4f80c2a9120697584c690a7104c"
-class_hash = "0x7896d9546dc21ad4349a3e79ee7186031935a0224dec75f493f71d898a32e8a"
-original_class_hash = "0x7896d9546dc21ad4349a3e79ee7186031935a0224dec75f493f71d898a32e8a"
+class_hash = "0x7f730a3fc2f488fe82021805aaa35c9bbc6779fab479bba3b06166047134bdc"
+original_class_hash = "0x7f730a3fc2f488fe82021805aaa35c9bbc6779fab479bba3b06166047134bdc"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/beastslayers-actions-35befdaf.json"
 reads = []

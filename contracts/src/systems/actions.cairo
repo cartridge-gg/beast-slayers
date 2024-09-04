@@ -59,7 +59,8 @@ mod actions {
             // 1 THING * BEAST_LEVEL
             let total_tokens: u256 = 1000000000000000000 * game.current_beast.level.into();
             // Distribute tokens based on damage dealt relative to beast's total health
-            let tokens_to_award = (total_tokens * damage.into()) / game.current_beast.health.into();
+            let beast_total_health = (game.current_beast.level * game.current_beast.level * game.current_beast.level) + 100;
+            let tokens_to_award = (total_tokens * damage.into()) / beast_total_health.into();
 
             // Update unclaimed tokens
             player.unclaimed_tokens += tokens_to_award;
