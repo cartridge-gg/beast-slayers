@@ -48,8 +48,8 @@ manifest_name = "beastslayers-Thing-6a24670b"
 [[contracts]]
 kind = "DojoContract"
 address = "0xb9c8cde5b4985246760a6fd3e4bc55bcc2f4f80c2a9120697584c690a7104c"
-class_hash = "0x2cbdeb3da5df8da03c38ce0320484ff88b6a63736c588d6c4797df8e1924244"
-original_class_hash = "0x2cbdeb3da5df8da03c38ce0320484ff88b6a63736c588d6c4797df8e1924244"
+class_hash = "0x45dcbc71c4ed4f70c7a77160df07ab6040544db775eba57c29463f9cc90d1e1"
+original_class_hash = "0x45dcbc71c4ed4f70c7a77160df07ab6040544db775eba57c29463f9cc90d1e1"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/beastslayers-actions-35befdaf.json"
 reads = []
@@ -64,7 +64,10 @@ writes = [
 ]
 init_calldata = []
 tag = "beastslayers-actions"
-systems = ["attack"]
+systems = [
+    "attack",
+    "claim_tokens",
+]
 manifest_name = "beastslayers-actions-35befdaf"
 
 [[models]]
@@ -213,8 +216,8 @@ key = false
 
 [[models]]
 kind = "DojoModel"
-class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
-original_class_hash = "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151"
+class_hash = "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4"
+original_class_hash = "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4"
 abi = "manifests/dev/deployment/abis/models/beastslayers-Warrior-60be6cf8.json"
 tag = "beastslayers-Warrior"
 qualified_path = "beastslayers::models::warrior"
@@ -228,4 +231,14 @@ key = true
 [[models.members]]
 name = "level"
 type = "u32"
+key = false
+
+[[models.members]]
+name = "score"
+type = "u32"
+key = false
+
+[[models.members]]
+name = "unclaimed_tokens"
+type = "u256"
 key = false

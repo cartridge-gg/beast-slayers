@@ -48,8 +48,6 @@ mod actions {
             }
 
             let mut damage = player.level;
-            let beast_initial_health = game.current_beast.health;
-            
             if game.current_beast.health > damage {
                 game.current_beast.health -= damage;
             } else {
@@ -58,15 +56,13 @@ mod actions {
             }
 
             // Calculate tokens to award based on damage dealt
-            let total_tokens = 1000 * beast_initial_health;
-            let tokens_to_award = (damage * total_tokens) / beast_initial_health;
-
-            // Apply early player bonus (inverse of beast level)
-            let early_player_bonus = 10 / game.current_beast.level;
-            let final_tokens = tokens_to_award * (100 + early_player_bonus) / 100;
+            // 1 THING * BEAST_LEVEL
+            let total_tokens: u256 = 1000000000000000000 * game.current_beast.level.into();
+            // distributed amongst attackers
+            let tokens_to_award = (damage.into() * total_tokens) / game.current_beast.level.into();
 
             // Update unclaimed tokens
-            player.unclaimed_tokens += final_tokens.into();
+            player.unclaimed_tokens += tokens_to_award;
 
             player.score += damage;
 
@@ -78,6 +74,13 @@ mod actions {
                 game.current_beast.level += 1;
                 game.current_beast.health = (game.current_beast.level*game.current_beast.level*game.current_beast.level) + 100;
             }
+
+            println!("player.unclaimed_tokens: {}", player.unclaimed_tokens);
+            println!("player.score: {}", player.score);
+            println!("player.level: {}", player.level);
+            println!("game.current_beast.level: {}", game.current_beast.level);
+            println!("game.current_beast.health: {}", game.current_beast.health);
+            println!("damage: {}", damage);
 
             set!(world, (player, game));
         }

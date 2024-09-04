@@ -2042,8 +2042,8 @@
     {
       "kind": "DojoContract",
       "address": "0xb9c8cde5b4985246760a6fd3e4bc55bcc2f4f80c2a9120697584c690a7104c",
-      "class_hash": "0x2cbdeb3da5df8da03c38ce0320484ff88b6a63736c588d6c4797df8e1924244",
-      "original_class_hash": "0x2cbdeb3da5df8da03c38ce0320484ff88b6a63736c588d6c4797df8e1924244",
+      "class_hash": "0x45dcbc71c4ed4f70c7a77160df07ab6040544db775eba57c29463f9cc90d1e1",
+      "original_class_hash": "0x45dcbc71c4ed4f70c7a77160df07ab6040544db775eba57c29463f9cc90d1e1",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -2206,6 +2206,13 @@
               "inputs": [],
               "outputs": [],
               "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "claim_tokens",
+              "inputs": [],
+              "outputs": [],
+              "state_mutability": "external"
             }
           ]
         },
@@ -2282,7 +2289,8 @@
       "init_calldata": [],
       "tag": "beastslayers-actions",
       "systems": [
-        "attack"
+        "attack",
+        "claim_tokens"
       ],
       "manifest_name": "beastslayers-actions-35befdaf"
     }
@@ -4986,10 +4994,20 @@
           "name": "level",
           "type": "u32",
           "key": false
+        },
+        {
+          "name": "score",
+          "type": "u32",
+          "key": false
+        },
+        {
+          "name": "unclaimed_tokens",
+          "type": "u256",
+          "key": false
         }
       ],
-      "class_hash": "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151",
-      "original_class_hash": "0x7d4ca4cf1799106afeb22558fa34f4d9be7bef8c5d8019c137d43faa38f3151",
+      "class_hash": "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4",
+      "original_class_hash": "0x6d8610c75a9890781702c7e7df035ad4fd3e94acd17be0cf7ca1d5649b7aea4",
       "abi": [
         {
           "type": "impl",
@@ -5360,6 +5378,20 @@
         },
         {
           "type": "struct",
+          "name": "core::integer::u256",
+          "members": [
+            {
+              "name": "low",
+              "type": "core::integer::u128"
+            },
+            {
+              "name": "high",
+              "type": "core::integer::u128"
+            }
+          ]
+        },
+        {
+          "type": "struct",
           "name": "beastslayers::models::Warrior",
           "members": [
             {
@@ -5369,6 +5401,14 @@
             {
               "name": "level",
               "type": "core::integer::u32"
+            },
+            {
+              "name": "score",
+              "type": "core::integer::u32"
+            },
+            {
+              "name": "unclaimed_tokens",
+              "type": "core::integer::u256"
             }
           ]
         },
