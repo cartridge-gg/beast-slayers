@@ -5,12 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@cartridge/account-wasm':
+    specifier: ^0.3.44
+    version: 0.3.44
   '@cartridge/connector':
-    specifier: ^0.3.43
-    version: 0.3.43(get-starknet-core@3.3.3)(react@18.3.1)
+    specifier: ^0.3.44
+    version: 0.3.44(get-starknet-core@3.3.3)(react@18.3.1)
   '@cartridge/controller':
-    specifier: ^0.3.43
-    version: 0.3.43
+    specifier: ^0.3.44
+    version: 0.3.44
   '@dojoengine/torii-wasm':
     specifier: ^1.0.0-alpha.8
     version: 1.0.0-alpha.8
@@ -345,22 +348,26 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@cartridge/connector@0.3.43(get-starknet-core@3.3.3)(react@18.3.1):
-    resolution: {integrity: sha512-RU8IxFu2NG3fta0zddT/+82Bv1MyYQ92Z1XDwvj7WRCXGV2MdCwu8+etou7uCdwFkkZ3kiT1EB41ky6umVaOgg==}
+  /@cartridge/account-wasm@0.3.44:
+    resolution: {integrity: sha512-nC4nSk1P9FIHzbTnjNxhU0ChwjQ6NUJTOUgRHt6l3390W5sNEL7rbXMi6gWox3780C5NGd+G+Z38iZ9zXYTsHg==}
+    dev: false
+
+  /@cartridge/connector@0.3.44(get-starknet-core@3.3.3)(react@18.3.1):
+    resolution: {integrity: sha512-aF3VSJauX+G717X/7iIGsVj48mGAZTKws+aIgrOZDf2Tp0mHNo4AaCZSvFAdhobyyz/YZqagEOzAjGZd2hzshA==}
     dependencies:
-      '@cartridge/controller': 0.3.43
+      '@cartridge/controller': 0.3.44
       '@starknet-react/core': 2.9.0(get-starknet-core@3.3.3)(react@18.3.1)(starknet@6.11.0)
       starknet: 6.11.0
-      typescript: 5.5.4
     transitivePeerDependencies:
       - encoding
       - get-starknet-core
       - react
     dev: false
 
-  /@cartridge/controller@0.3.43:
-    resolution: {integrity: sha512-naR4FiJVFU0BSFgOSVq7ttaGlQCA/cjGIV96b4SRuodTmkH0ViEwutsSX3zqWEyYP56Yn1xXWsEFf5ENa9X9eQ==}
+  /@cartridge/controller@0.3.44:
+    resolution: {integrity: sha512-T4KBdf8L3Z5Lk4Q0njnOXN/Kn9Rm1nF8abc7vKJIikiOCK2Sq0bzVpKoQBkUGmbJbu8m71rE+pf1qX8VWNuKYA==}
     dependencies:
+      '@cartridge/account-wasm': 0.3.44
       '@cartridge/penpal': 6.2.3
       base64url: 3.0.1
       cbor-x: 1.6.0
@@ -3571,6 +3578,7 @@ packages:
     resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
 
   /universal-user-agent@6.0.1:
     resolution: {integrity: sha512-yCzhz6FN2wU1NiiQRogkTQszlQSlpWaw8SvVegAc+bDxbzHgh1vX8uIe8OYyMH6DwH+sdTJsgMl36+mSMdRJIQ==}
