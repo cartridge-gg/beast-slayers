@@ -120,7 +120,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
 
     const paymaster = JSON.stringify({
-      caller: Dojo.cairoShortStringToFelt("ANY_CALLER")
+      caller: "ANY_CALLER"
     });
     utils.openLink(
       encodeUrl(
