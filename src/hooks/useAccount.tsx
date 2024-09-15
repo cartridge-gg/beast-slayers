@@ -118,13 +118,10 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       setSessionSigner(newSigner);
       return;
     }
-
-    const paymaster = JSON.stringify({
-      caller: "ANY_CALLER"
-    });
+    
     utils.openLink(
       encodeUrl(
-        `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}&paymaster=${JSON.stringify(paymaster)}`
+        `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}`
       )
     );
     miniApp.close();

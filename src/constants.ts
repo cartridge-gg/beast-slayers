@@ -1,6 +1,6 @@
 export const TORII_URL = "https://api.cartridge.gg/x/beastslayers/torii";
 export const RELAY_URL = "/ip4/127.0.0.1/udp/9091/webrtc-direct";
-export const RPC_URL = "https://api.cartridge.gg/x/starknet/sepolia";
+export const RPC_URL = "https://api.cartridge.gg/x/starknet/sepolia?paymaster=true";
 export const KEYCHAIN_URL = "https://x.cartridge.gg";
 export const REDIRECT_URI = "https://t.me/hitthingbot/hitthing";
 export const WORLD_ADDRESS =
