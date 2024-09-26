@@ -12,8 +12,8 @@ spawn = "./scripts/spawn.sh"
 move = "./scripts/move.sh"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.9" }
-origami_token = { git = "https://github.com/dojoengine/origami", tag = "v1.0.0-alpha.9" }   
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.12" }
+origami_token = { git = "https://github.com/dojoengine/origami", tag = "v1.0.0-alpha.12" }   
 
 [[target.dojo]]
 
@@ -28,3 +28,4 @@ build-external-contracts = [
 
 [profile.dev]
 [profile.sepolia]
+[profile.mainnet]

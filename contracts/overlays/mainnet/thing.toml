@@ -1,0 +1,8 @@
+tag = "beastslayers-Thing"
+writes = [
+    "beastslayers-ERC20MetadataModel",
+    "beastslayers-ERC20BalanceModel",
+    "beastslayers-ERC20AllowanceModel",
+    "beastslayers-ERC20BridgeableModel",
+    "beastslayers-InitializableModel",
+]

@@ -1,0 +1,15 @@
+kind = "DojoContract"
+class_hash = "0x3e13956f72e47a887fda5cd910598ba749a2a52d57e46fee469db3e6686f5e2"
+original_class_hash = "0x3e13956f72e47a887fda5cd910598ba749a2a52d57e46fee469db3e6686f5e2"
+base_class_hash = "0x0"
+abi = "manifests/mainnet/base/abis/contracts/beastslayers-Thing-6a24670b.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "beastslayers-Thing"
+systems = [
+    "initializer",
+    "mint_from",
+    "burn_from",
+]
+manifest_name = "beastslayers-Thing-6a24670b"
