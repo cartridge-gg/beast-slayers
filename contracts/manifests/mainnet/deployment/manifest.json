@@ -1255,10 +1255,10 @@
   "contracts": [
     {
       "kind": "DojoContract",
-      "address": null,
+      "address": "0x5a87c0b8a8e716af90ca250745be1a219475f316c299a87cd6d991d9f8bd5f7",
       "class_hash": "0x3e13956f72e47a887fda5cd910598ba749a2a52d57e46fee469db3e6686f5e2",
       "original_class_hash": "0x3e13956f72e47a887fda5cd910598ba749a2a52d57e46fee469db3e6686f5e2",
-      "base_class_hash": "0x0",
+      "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
           "type": "impl",
@@ -2046,10 +2046,10 @@
     },
     {
       "kind": "DojoContract",
-      "address": null,
+      "address": "0x70fc96f845e393c732a468b6b6b54d876bd1a29e41a026e8b13579bf98eec8f",
       "class_hash": "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac",
       "original_class_hash": "0x5e8e4eb307b1342aeba5ba83d5145fcaf74027466e462cb5578bb4c1a93fac",
-      "base_class_hash": "0x0",
+      "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
           "type": "impl",
