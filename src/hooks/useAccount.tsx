@@ -103,7 +103,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       accountStorage.ownerGuid,
       Dojo.cairoShortStringToFelt("SN_MAINNET"),
       {
-        expiresAt: Number.parseInt(accountStorage.expires_at),
+        expiresAt: Number(accountStorage.expires_at),
         policies: POLICIES,
       }
     );
