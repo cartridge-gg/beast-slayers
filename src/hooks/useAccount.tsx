@@ -10,6 +10,7 @@ interface AccountStorage {
   address: string;
   ownerGuid: string;
   transactionHash?: string;
+  expires_at: string;
 }
 
 interface SessionSigner {
@@ -102,7 +103,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       accountStorage.ownerGuid,
       Dojo.cairoShortStringToFelt("SN_MAINNET"),
       {
-        expiresAt: 3000000000,
+        expiresAt: Number.parseInt(accountStorage.expires_at),
         policies: POLICIES,
       }
     );
