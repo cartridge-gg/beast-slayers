@@ -77,7 +77,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
     storage.get("account").then((account) => {
       if (account) {
         const parsedAccount = JSON.parse(account) as AccountStorage;
-        if (!parsedAccount.address || !parsedAccount.ownerGuid) {
+        if (!parsedAccount.address || !parsedAccount.ownerGuid || !parsedAccount.expires_at) {
           return storage.delete("account");
         }
         setAccountStorage(parsedAccount);
