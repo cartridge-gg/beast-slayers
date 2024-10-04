@@ -10,7 +10,7 @@ interface AccountStorage {
   address: string;
   ownerGuid: string;
   transactionHash?: string;
-  expires_at: string;
+  expiresAt: string;
 }
 
 interface SessionSigner {
@@ -77,7 +77,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
     storage.get("account").then((account) => {
       if (account) {
         const parsedAccount = JSON.parse(account) as AccountStorage;
-        if (!parsedAccount.address || !parsedAccount.ownerGuid || !parsedAccount.expires_at) {
+        if (!parsedAccount.address || !parsedAccount.ownerGuid || !parsedAccount.expiresAt) {
           return storage.delete("account");
         }
         setAccountStorage(parsedAccount);
@@ -103,7 +103,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       accountStorage.ownerGuid,
       Dojo.cairoShortStringToFelt("SN_MAINNET"),
       {
-        expiresAt: Number(accountStorage.expires_at),
+        expiresAt: Number(accountStorage.expiresAt),
         policies: POLICIES,
       }
     );
