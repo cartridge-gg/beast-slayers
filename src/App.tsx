@@ -143,7 +143,7 @@ function AppContent() {
     playRandomSound();
 
     try {
-      await account?.execute([
+      await account?.execute_from_outside([
         {
           calldata: [],
           entrypoint: "attack",
