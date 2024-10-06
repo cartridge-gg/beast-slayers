@@ -60,8 +60,6 @@ function AppContent() {
   const warrior = useWarrior(client, address);
   const thingBalance = useThingBalance(client, address);
 
-  console.log(warrior);
-
   // Create particles for the background
   useEffect(() => {
     const createParticle = () => ({

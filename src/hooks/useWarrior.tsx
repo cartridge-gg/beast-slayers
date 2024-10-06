@@ -21,7 +21,6 @@ export function useWarrior(client?: ToriiClient, address?: string) {
 
   const updateWarrior = (warriorData: any) => {
     setWarrior((oldWarrior) => {
-      console.log(warriorData);
       const mappedWarrior = {
         address: warriorData.address.value,
         level: warriorData.level.value,

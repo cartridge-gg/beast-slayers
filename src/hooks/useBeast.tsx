@@ -49,6 +49,7 @@ export function useBeast(client?: ToriiClient) {
       subscription.current = await client.onEntityUpdated(
         [{ HashedKeys: Object.keys(entities) }],
         (_hashedKeys, models) => {
+          if (!models["beastslayers-Game"]) return;
           const updatedGame = models["beastslayers-Game"];
           updateBeast(updatedGame);
         }
