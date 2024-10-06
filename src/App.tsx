@@ -15,7 +15,7 @@ import {
   TORII_URL,
   WORLD_ADDRESS,
 } from "./constants";
-import { useViewport } from "@telegram-apps/sdk-react";
+import { viewport } from "@telegram-apps/sdk-react";
 import { useBeast } from "./hooks/useBeast";
 import { useWarrior } from "./hooks/useWarrior";
 import { useThingBalance } from "./hooks/useThingBalance";
@@ -30,10 +30,9 @@ const getBeastColor = (level: number) => {
 };
 
 function AppContent() {
-  const viewport = useViewport();
   useEffect(() => {
     viewport?.expand();
-  }, [viewport]);
+  }, []);
 
   // Controller session
   const { account, openConnectionPage, address, clearSession, username } = useAccount();

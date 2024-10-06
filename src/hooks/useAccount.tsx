@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { mockTelegramEnv, useCloudStorage, useLaunchParams, useMiniApp, useUtils } from "@telegram-apps/sdk-react";
+import { cloudStorage, miniApp, mockTelegramEnv, openLink, retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import * as Dojo from "@dojoengine/torii-wasm";
 import { KEYCHAIN_URL, POLICIES, REDIRECT_URI, RPC_URL } from "../constants";
 import encodeUrl from "encodeurl";
@@ -28,7 +28,9 @@ interface AccountContextType {
   username: string | undefined;
 }
 
-if (!window?.['Telegram']) {
+const isTelegram = !!window?.['Telegram'];
+
+if (!isTelegram) {
   mockTelegramEnv({
     themeParams: {
       accentTextColor: '#6ab2f2',
@@ -45,24 +47,34 @@ if (!window?.['Telegram']) {
       subtitleTextColor: '#708499',
       textColor: '#f5f5f5',
     },
+    startParam: (() => {
+      const url = new URL(window.location.href);
+      return url.searchParams.get("startapp");
+    })(),
     version: '7.2',
     platform: 'tdesktop',
   });
   
 }
 
+const storage = isTelegram ? {
+  get: (key: string) => cloudStorage.getItem(key),
+  set: (key: string, value: string) => cloudStorage.setItem(key, value),
+  delete: (key: string) => cloudStorage.deleteItem(key),
+} : {
+  get: (key: string): Promise<string | null> => new Promise((resolve) => resolve(localStorage.getItem(key))),
+  set: (key: string, value: string): Promise<void> => new Promise((resolve) => resolve(localStorage.setItem(key, value))),
+  delete: (key: string): Promise<void> => new Promise((resolve) => resolve(localStorage.removeItem(key))),
+};
+
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
 
 export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { initData } = useLaunchParams();
-  const storage = useCloudStorage();
-  const utils = useUtils();
-  const miniApp = useMiniApp();
-
   const [accountStorage, setAccountStorage] = useState<AccountStorage>();
   const [sessionSigner, setSessionSigner] = useState<SessionSigner>();
 
   useEffect(() => {
+
     storage.get("sessionSigner").then((signer) => {
       if (signer) return setSessionSigner(JSON.parse(signer) as SessionSigner);
 
@@ -83,15 +95,16 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setAccountStorage(parsedAccount);
       }
     });
-  }, [storage]);
+  }, []);
 
   useEffect(() => {
+    const initData = retrieveLaunchParams();
     if (!initData?.startParam) return;
 
     const cartridgeAccount = JSON.parse(atob(initData.startParam)) as AccountStorage;
     storage.set("account", JSON.stringify(cartridgeAccount));
     setAccountStorage(cartridgeAccount);
-  }, [initData, storage]);
+  }, []);
 
   const account = useMemo(() => {
     if (!accountStorage || !sessionSigner) return;
@@ -120,7 +133,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return;
     }
     
-    utils.openLink(
+    openLink(
       encodeUrl(
         `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}`
       )
