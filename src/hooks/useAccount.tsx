@@ -99,7 +99,6 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   useEffect(() => {
     const initData = retrieveLaunchParams();
-    console.log(initData);
     if (!initData?.startParam) return;
 
     const cartridgeAccount = JSON.parse(atob(initData.startParam)) as AccountStorage;
@@ -142,7 +141,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       ) :
       // open link in current window
       window.location.href = encodeUrl(
-        `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}`
+        `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${window.location.href}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}`
       );
     miniApp.close();
   };
