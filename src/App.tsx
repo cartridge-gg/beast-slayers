@@ -241,7 +241,7 @@ function AppContent() {
       ))}
       <div className="relative z-10 flex flex-col justify-between p-5 h-full">
         <div>
-          <h1 className="text-white text-center mb-5 text-6xl">
+          <h1 className="text-white text-center mt-10 text-6xl">
             Hit Thing
           </h1>
           <Button
