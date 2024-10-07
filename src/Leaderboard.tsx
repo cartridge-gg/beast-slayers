@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLeaderboard } from './hooks/useLeaderboard';
 import { ToriiClient } from "@dojoengine/torii-wasm";
 
