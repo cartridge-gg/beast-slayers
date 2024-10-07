@@ -16,7 +16,7 @@ export function useLeaderboard(client?: ToriiClient) {
 
     const fetchLeaderboard = async () => {
       const entities = await client.getEntities({
-        limit: 1000, // Adjust this value based on your expected number of warriors
+        limit: 1000,
         offset: 0,
         clause: undefined
       });
