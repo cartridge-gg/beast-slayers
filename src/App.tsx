@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { useViewport } from "@telegram-apps/sdk-react";
 import { Leaderboard } from './Leaderboard';
 import { useThingBalances } from "./hooks/useThingBalances";
+import { FundWalletModal } from './FundWallet';
 
 const getBeastColor = (level: number) => {
   if (level <= 2) return "hue-rotate-0";
@@ -116,6 +117,8 @@ function AppContent() {
     randomSound();
   };
 
+  const [showFundWalletModal, setShowFundWalletModal] = useState(false);
+
   // Attack the beast
   const handleImageClick = async (event) => {
     if (!account) {
@@ -151,9 +154,11 @@ function AppContent() {
         },
       ]);
     } catch (error) {
-      // If the user is not registered, open the connection page
       if (error.toString().includes("session/not-registered")) {
+        // If the user is not registered, open the connection page
         openConnectionPage();
+      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee")) {
+        setShowFundWalletModal(true);
       } else {
         console.error(error);
       }
@@ -313,6 +318,12 @@ function AppContent() {
           client={client} 
           balances={thingBalances}
           onClose={() => setShowLeaderboard(false)} 
+        />
+      )}
+      {showFundWalletModal && (
+        <FundWalletModal 
+          address={address}
+          onClose={() => setShowFundWalletModal(false)} 
         />
       )}
     </div>
