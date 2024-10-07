@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import {
   cloudStorage,
+  isTMA,
   miniApp,
   mockTelegramEnv,
   openLink,
@@ -145,7 +146,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   }, [accountStorage, sessionSigner]);
 
-  const openConnectionPage = () => {
+  const openConnectionPage = async () => {
     if (!sessionSigner) {
       const privateKey = Dojo.signingKeyNew();
       const publicKey = Dojo.verifyingKeyNew(privateKey);
@@ -156,7 +157,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    if (window?.["Telegram"]) {
+    if (await isTMA()) {
       openLink(
         encodeUrl(
           `${KEYCHAIN_URL}/session?public_key=${
