@@ -34,7 +34,7 @@ function AppContent() {
 
   useEffect(() => {
     viewport?.expand();
-  }, []);
+  }, [viewport]);
 
   // Controller session
   const { account, openConnectionPage, address, clearSession, username } = useAccount();
