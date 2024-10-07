@@ -17,10 +17,10 @@ import {
 } from "./constants";
 import { useBeast } from "./hooks/useBeast";
 import { useWarrior } from "./hooks/useWarrior";
-import { useThingBalance } from "./hooks/useThingBalance";
 import toast from "react-hot-toast";
 import { useViewport } from "@telegram-apps/sdk-react";
 import { Leaderboard } from './Leaderboard';
+import { useThingBalances } from "./hooks/useThingBalances";
 
 const getBeastColor = (level: number) => {
   if (level <= 2) return "hue-rotate-0";
@@ -61,7 +61,7 @@ function AppContent() {
   // Fetch and subscribe to the beast
   const beast = useBeast(client);
   const warrior = useWarrior(client, address);
-  const thingBalance = useThingBalance(client, address);
+  const thingBalances = useThingBalances(client);
 
   // Create particles for the background
   useEffect(() => {
@@ -210,7 +210,7 @@ function AppContent() {
         >
           {username ? (
             <>
-              {username} ({`${formatEth(thingBalance)} $THING`})
+              {username} ({`${formatEth(thingBalances[address])} $THING`})
             </>
           ) : (
             'CLEAR'
@@ -311,6 +311,7 @@ function AppContent() {
       {showLeaderboard && (
         <Leaderboard 
           client={client} 
+          balances={thingBalances}
           onClose={() => setShowLeaderboard(false)} 
         />
       )}
