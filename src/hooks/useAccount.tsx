@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import {
   cloudStorage,
-  isTMA,
   miniApp,
   mockTelegramEnv,
   openLink,
@@ -65,7 +64,7 @@ if (!isTelegram) {
       return url.searchParams.get("startapp");
     })(),
     version: "7.2",
-    platform: "tdesktop",
+    platform: "web",
   });
 }
 
@@ -146,7 +145,9 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   }, [accountStorage, sessionSigner]);
 
-  const openConnectionPage = async () => {
+  const openConnectionPage = () => {
+    const { platform} = retrieveLaunchParams();
+
     if (!sessionSigner) {
       const privateKey = Dojo.signingKeyNew();
       const publicKey = Dojo.verifyingKeyNew(privateKey);
@@ -157,18 +158,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    if (await isTMA()) {
-      openLink(
-        encodeUrl(
-          `${KEYCHAIN_URL}/session?public_key=${
-            sessionSigner.publicKey
-          }&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(
-            POLICIES
-          )}&rpc_url=${RPC_URL}`
-        )
-      );
-      miniApp.close();
-    } else {
+    if (platform === "web") {
       window.location.href = encodeUrl(
         `${KEYCHAIN_URL}/session?public_key=${
           sessionSigner.publicKey
@@ -178,7 +168,20 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
           POLICIES
         )}&rpc_url=${RPC_URL}`
       );
+      return;
+      
     }
+
+    openLink(
+      encodeUrl(
+        `${KEYCHAIN_URL}/session?public_key=${
+          sessionSigner.publicKey
+        }&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(
+          POLICIES
+        )}&rpc_url=${RPC_URL}`
+      )
+    );
+    miniApp.close();
   };
 
   const clearSession = () => {
