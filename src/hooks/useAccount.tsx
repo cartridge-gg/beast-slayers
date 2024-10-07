@@ -40,9 +40,7 @@ interface AccountContextType {
   username: string | undefined;
 }
 
-const isTelegram = !!window?.["Telegram"];
-
-if (!isTelegram) {
+if (!window?.["Telegram"]) {
   mockTelegramEnv({
     themeParams: {
       accentTextColor: "#6ab2f2",
@@ -68,7 +66,7 @@ if (!isTelegram) {
   });
 }
 
-const storage = isTelegram
+const storage = retrieveLaunchParams().platform === "web"
   ? {
       get: (key: string) => cloudStorage.getItem(key),
       set: (key: string, value: string) => cloudStorage.setItem(key, value),
