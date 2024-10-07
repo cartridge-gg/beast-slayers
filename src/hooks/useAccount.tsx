@@ -157,8 +157,9 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       const publicKey = Dojo.verifyingKeyNew(privateKey);
 
       const newSigner = { privateKey, publicKey };
-      storage.set("sessionSigner", JSON.stringify(newSigner));
-      setSessionSigner(newSigner);
+      storage.set("sessionSigner", JSON.stringify(newSigner)).then(() => {
+        setSessionSigner(newSigner);
+      });
       return;
     }
 
@@ -188,10 +189,12 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const clearSession = () => {
-    storage.delete("sessionSigner");
-    storage.delete("account");
-    setSessionSigner(undefined);
-    setAccountStorage(undefined);
+    storage.delete("sessionSigner").then(() => {
+      setSessionSigner(undefined);
+    });
+    storage.delete("account").then(() => {
+      setAccountStorage(undefined);
+    });
   };
 
   const value = {
