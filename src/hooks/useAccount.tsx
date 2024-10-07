@@ -66,7 +66,7 @@ if (!window?.["Telegram"]) {
   });
 }
 
-const storage = retrieveLaunchParams().platform === "web"
+const storage = retrieveLaunchParams().platform !== "web"
   ? {
       get: (key: string) => cloudStorage.getItem(key),
       set: (key: string, value: string) => cloudStorage.setItem(key, value),
