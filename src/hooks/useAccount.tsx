@@ -114,7 +114,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       sessionSigner.privateKey,
       accountStorage.address,
       accountStorage.ownerGuid,
-      Dojo.cairoShortStringToFelt("SN_MAINNET"),
+      Dojo.cairoShortStringToFelt("SN_MAIN"),
       {
         expiresAt: Number(accountStorage.expiresAt),
         policies: POLICIES,
