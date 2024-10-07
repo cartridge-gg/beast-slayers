@@ -2,11 +2,17 @@ import { useLeaderboard } from './hooks/useLeaderboard';
 import { ToriiClient } from "@dojoengine/torii-wasm";
 
 interface LeaderboardProps {
-  client?: ToriiClient;
+  client: ToriiClient;
+  balances: Record<string, bigint>;
   onClose: () => void;
 }
 
-export function Leaderboard({ client, onClose }: LeaderboardProps) {
+const formatEth = (wei: bigint): string => {
+    const eth = Number(wei) / 1e18;
+    return eth.toFixed(2);
+  };
+
+export function Leaderboard({ client, balances, onClose }: LeaderboardProps) {
   const { leaderboard, loading } = useLeaderboard(client);
 
   return (
@@ -21,7 +27,7 @@ export function Leaderboard({ client, onClose }: LeaderboardProps) {
           <ul>
             {leaderboard.map((warrior, index) => (
               <li key={warrior.address} className="mb-2">
-                <span className="font-bold">{index + 1}.</span> {warrior.address.slice(0, 6)}...{warrior.address.slice(-4)} - Score: {warrior.score}
+                <span className="font-bold">{index + 1}.</span> {warrior.address.slice(0, 6)}...{warrior.address.slice(-4)} - Score: {warrior.score} - {formatEth(balances?.[warrior.address] ?? 0n)} $THING
               </li>
             ))}
           </ul>
