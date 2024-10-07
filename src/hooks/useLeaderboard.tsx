@@ -8,6 +8,7 @@ export interface LeaderboardWarrior {
 }
 
 export function useLeaderboard(client?: ToriiClient) {
+  const [loading, setLoading] = useState(true);
   const [leaderboard, setLeaderboard] = useState<LeaderboardWarrior[]>([]);
   const subscription = useRef<any>();
 
@@ -15,14 +16,22 @@ export function useLeaderboard(client?: ToriiClient) {
     if (!client) return;
 
     const fetchLeaderboard = async () => {
+      setLoading(true);
       const entities = await client.getEntities({
         limit: 1000,
         offset: 0,
-        clause: undefined
+        clause: {
+            Keys: {
+                models: ["beastslayers-Warrior"],
+                keys: [undefined],
+                pattern_matching: "VariableLen"
+            }
+        }
       });
 
       const warriors = Object.values(entities).map((entity) => {
         const warriorData = entity["beastslayers-Warrior"];
+
         return {
           address: warriorData.address.value,
           level: warriorData.level.value,
@@ -36,6 +45,7 @@ export function useLeaderboard(client?: ToriiClient) {
         .slice(0, 10);
 
       setLeaderboard(topWarriors);
+      setLoading(false);
     };
 
     const subscribeToLeaderboard = async () => {
@@ -78,10 +88,10 @@ export function useLeaderboard(client?: ToriiClient) {
     // Clean up the subscription on component unmount
     return () => {
       if (subscription.current) {
-        subscription.current.unsubscribe();
+        subscription.current.cancel();
       }
     };
   }, [client]);
 
-  return leaderboard;
+  return { leaderboard, loading };
 }
