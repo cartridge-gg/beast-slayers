@@ -156,7 +156,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    if (isTelegram) {
+    if (window?.["Telegram"]) {
       openLink(
         encodeUrl(
           `${KEYCHAIN_URL}/session?public_key=${
