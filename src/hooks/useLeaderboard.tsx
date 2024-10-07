@@ -44,7 +44,29 @@ export function useLeaderboard(client?: ToriiClient) {
         (_hashedKeys, models) => {
           const updatedWarrior = models["beastslayers-Warrior"];
           if (updatedWarrior) {
-            fetchLeaderboard();
+            const newWarrior: LeaderboardWarrior = {
+              address: updatedWarrior.address.value,
+              level: updatedWarrior.level.value,
+              score: updatedWarrior.score.value,
+            };
+
+            setLeaderboard(prevLeaderboard => {
+              const updatedLeaderboard = [...prevLeaderboard];
+              const existingIndex = updatedLeaderboard.findIndex(w => w.address === newWarrior.address);
+
+              if (existingIndex !== -1) {
+                // Update existing warrior
+                updatedLeaderboard[existingIndex] = newWarrior;
+              } else if (updatedLeaderboard.length < 10 || newWarrior.score > updatedLeaderboard[9].score) {
+                // Add new warrior if leaderboard has less than 10 entries or if the new score is higher than the lowest score
+                updatedLeaderboard.push(newWarrior);
+              }
+
+              // Sort and slice to keep top 10
+              return updatedLeaderboard
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 10);
+            });
           }
         }
       );
