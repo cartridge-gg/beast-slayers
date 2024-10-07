@@ -1,3 +1,4 @@
+import { useUsernames } from './contexts/UsernamesContext';
 import { useLeaderboard } from './hooks/useLeaderboard';
 import { ToriiClient } from "@dojoengine/torii-wasm";
 
@@ -14,6 +15,7 @@ const formatEth = (wei: bigint): string => {
 
 export function Leaderboard({ client, balances, onClose }: LeaderboardProps) {
   const { leaderboard, loading } = useLeaderboard(client);
+  const { usernamesCache } = useUsernames()
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
@@ -27,7 +29,7 @@ export function Leaderboard({ client, balances, onClose }: LeaderboardProps) {
           <ul>
             {leaderboard.map((warrior, index) => (
               <li key={warrior.address} className="mb-2">
-                <span className="font-bold">{index + 1}.</span> {warrior.address.slice(0, 6)}...{warrior.address.slice(-4)} - Score: {warrior.score} - {formatEth(balances?.[warrior.address] ?? 0n)} $THING
+                <span className="font-bold">{index + 1}.</span> {usernamesCache?.[warrior.address] ?? warrior.address.slice(0, 6)}...{warrior.address.slice(-4)} - Score: {warrior.score} - {formatEth(balances?.[warrior.address] ?? 0n)} $THING
               </li>
             ))}
           </ul>
