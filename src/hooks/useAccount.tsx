@@ -96,18 +96,18 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sessionSigner, setSessionSigner] = useState<SessionSigner>();
 
   useEffect(() => {
-    storage.get("sessionSigner").then((signer) => {
+    storage.get("sessionSigner").then(async (signer) => {
       if (signer) return setSessionSigner(JSON.parse(signer) as SessionSigner);
 
       const privateKey = Dojo.signingKeyNew();
       const publicKey = Dojo.verifyingKeyNew(privateKey);
 
       const newSigner = { privateKey, publicKey };
-      storage.set("sessionSigner", JSON.stringify(newSigner));
+      await storage.set("sessionSigner", JSON.stringify(newSigner));
       setSessionSigner(newSigner);
     });
 
-    storage.get("account").then((account) => {
+    storage.get("account").then(async (account) => {
       if (account) {
         const parsedAccount = JSON.parse(account) as AccountStorage;
         if (
@@ -115,7 +115,7 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
           !parsedAccount.ownerGuid ||
           !parsedAccount.expiresAt
         ) {
-          return storage.delete("account");
+          return await storage.delete("account");
         }
         setAccountStorage(parsedAccount);
       }
@@ -129,8 +129,9 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
     const cartridgeAccount = JSON.parse(
       atob(initData.startParam)
     ) as AccountStorage;
-    storage.set("account", JSON.stringify(cartridgeAccount));
-    setAccountStorage(cartridgeAccount);
+    storage.set("account", JSON.stringify(cartridgeAccount)).then(() => {
+      setAccountStorage(cartridgeAccount);
+    });
   }, []);
 
   const account = useMemo(() => {
