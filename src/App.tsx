@@ -15,11 +15,11 @@ import {
   TORII_URL,
   WORLD_ADDRESS,
 } from "./constants";
-import { viewport } from "@telegram-apps/sdk-react";
 import { useBeast } from "./hooks/useBeast";
 import { useWarrior } from "./hooks/useWarrior";
 import { useThingBalance } from "./hooks/useThingBalance";
 import toast from "react-hot-toast";
+import { useViewport } from "@telegram-apps/sdk-react";
 
 const getBeastColor = (level: number) => {
   if (level <= 2) return "hue-rotate-0";
@@ -30,6 +30,8 @@ const getBeastColor = (level: number) => {
 };
 
 function AppContent() {
+  const viewport = useViewport();
+
   useEffect(() => {
     viewport?.expand();
   }, []);

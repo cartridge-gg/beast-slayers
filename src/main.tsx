@@ -5,36 +5,39 @@ import "./index.css";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import { SDKProvider } from "@telegram-apps/sdk-react";
 
 function useMaxToasts(max: number) {
-  const { toasts } = useToasterStore()
+  const { toasts } = useToasterStore();
 
   useEffect(() => {
     toasts
       .filter((t) => t.visible) // Only consider visible toasts
       .filter((_, i) => i >= max) // Is toast index over limit?
-      .forEach((t) => toast.dismiss(t.id)) // Dismiss – Use toast.remove(t.id) for no exit animation
-  }, [toasts, max])
+      .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) for no exit animation
+  }, [toasts, max]);
 }
 
 function ToasterWithMax({
   max = 4,
   ...props
 }: React.ComponentProps<typeof Toaster> & {
-  max?: number
+  max?: number;
 }) {
-  useMaxToasts(max)
+  useMaxToasts(max);
 
-  return <Toaster {...props} />
+  return <Toaster {...props} />;
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <SDKProvider>
       <Router>
         <Routes>
           <Route path="/" element={<App />} />
         </Routes>
       </Router>
-      <ToasterWithMax position='top-center' max={1} />
+      <ToasterWithMax position="top-center" max={1} />
+    </SDKProvider>
   </React.StrictMode>
 );
