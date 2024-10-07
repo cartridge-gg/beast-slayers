@@ -66,26 +66,20 @@ interface AccountContextType {
 //   });
 // }
 
-// const storage = retrieveLaunchParams().platform !== "web"
-//   ? {
-//       get: (key: string) => cloudStorage.getItem(key),
-//       set: (key: string, value: string) => cloudStorage.setItem(key, value),
-//       delete: (key: string) => cloudStorage.deleteItem(key),
-//     }
-//   : {
-//       get: (key: string): Promise<string | null> =>
-//         new Promise((resolve) => resolve(localStorage.getItem(key))),
-//       set: (key: string, value: string): Promise<void> =>
-//         new Promise((resolve) => resolve(localStorage.setItem(key, value))),
-//       delete: (key: string): Promise<void> =>
-//         new Promise((resolve) => resolve(localStorage.removeItem(key))),
-//     };
-
-const storage = {
-  get: (key: string) => cloudStorage.getItem(key),
-  set: (key: string, value: string) => cloudStorage.setItem(key, value),
-  delete: (key: string) => cloudStorage.deleteItem(key),
-};
+const storage = retrieveLaunchParams().platform !== "web"
+  ? {
+      get: (key: string) => cloudStorage.getItem(key),
+      set: (key: string, value: string) => cloudStorage.setItem(key, value),
+      delete: (key: string) => cloudStorage.deleteItem(key),
+    }
+  : {
+      get: (key: string): Promise<string | null> =>
+        new Promise((resolve) => resolve(localStorage.getItem(key))),
+      set: (key: string, value: string): Promise<void> =>
+        new Promise((resolve) => resolve(localStorage.setItem(key, value))),
+      delete: (key: string): Promise<void> =>
+        new Promise((resolve) => resolve(localStorage.removeItem(key))),
+    };
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
 
