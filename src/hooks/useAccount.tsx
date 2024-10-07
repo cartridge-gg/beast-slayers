@@ -124,7 +124,8 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({ child
       encodeUrl(
         `${KEYCHAIN_URL}/session?public_key=${sessionSigner.publicKey}&redirect_uri=${REDIRECT_URI}&redirect_query_name=startapp&policies=${JSON.stringify(POLICIES)}&rpc_url=${RPC_URL}`
       ), {
-        tryBrowser: true
+        tryBrowser: true,
+        tryInstantView: false,
       }
     );
     miniApp.close();
