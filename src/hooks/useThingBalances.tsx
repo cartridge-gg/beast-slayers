@@ -8,7 +8,9 @@ export function useThingBalances(client?: ToriiClient) {
   const updateBalance = (balanceData: any) => {
     setBalances((prevBalances) => {
       const newBalances = { ...prevBalances };
-      newBalances[balanceData.account.value] = BigInt('0x' + balanceData.amount.value);
+      newBalances[balanceData.account?.value ?? balanceData.account] = BigInt(
+        "0x" + (balanceData.amount?.value ?? balanceData.amount)
+      );
       return newBalances;
     });
   };
@@ -33,11 +35,13 @@ export function useThingBalances(client?: ToriiClient) {
         return;
       }
 
-      setBalances(prevBalances => {
+      setBalances((prevBalances) => {
         const newBalances = { ...prevBalances };
-        Object.values(entities).forEach(entity => {
+        Object.values(entities).forEach((entity) => {
           const balanceData = entity["beastslayers-ERC20BalanceModel"] as any;
-          newBalances[balanceData.account.value] = BigInt('0x' + balanceData.amount.value);
+          newBalances[balanceData.account.value] = BigInt(
+            "0x" + balanceData.amount.value
+          );
         });
         return newBalances;
       });
@@ -45,7 +49,15 @@ export function useThingBalances(client?: ToriiClient) {
 
     const subscribeToBalance = async () => {
       subscription.current = await client.onEntityUpdated(
-        [{ Keys: { keys: [undefined, undefined], models: ["beastslayers-ERC20BalanceModel"], pattern_matching: "FixedLen" } }],
+        [
+          {
+            Keys: {
+              keys: [undefined, undefined],
+              models: ["beastslayers-ERC20BalanceModel"],
+              pattern_matching: "FixedLen",
+            },
+          },
+        ],
         (_hashedKeys, models) => {
           const updatedBalance = models["beastslayers-ERC20BalanceModel"];
           if (updatedBalance) {
@@ -59,5 +71,5 @@ export function useThingBalances(client?: ToriiClient) {
     subscribeToBalance();
   }, [client]);
 
-  return balances;
+  return { balances, optimisticallyUpdateBalance: updateBalance };
 }

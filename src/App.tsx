@@ -60,8 +60,8 @@ function AppContent() {
 
   // Fetch and subscribe to the beast
   const beast = useBeast(client);
-  const warrior = useWarrior(client, address);
-  const thingBalances = useThingBalances(client);
+  const { warrior, optimisticallyUpdateWarrior } = useWarrior(client, address);
+  const { balances, optimisticallyUpdateBalance } = useThingBalances(client);
 
   // Create particles for the background
   useEffect(() => {
@@ -179,6 +179,16 @@ function AppContent() {
       return;
     }
 
+    const unclaimedTokens = warrior.unclaimed_tokens;
+    optimisticallyUpdateWarrior({ 
+      ...warrior,
+      unclaimed_tokens: 0n,
+     });
+    optimisticallyUpdateBalance({
+      account: address,
+      amount: unclaimedTokens,
+    });
+
     try {
       await account.execute_from_outside([
         {
@@ -187,7 +197,6 @@ function AppContent() {
           contractAddress: ACTIONS_ADDRESS,
         },
       ]);
-      
       toast.success(`Claimed ${formatEth(warrior.unclaimed_tokens)} $THING`);
     } catch (error) {
       toast.error("Failed to claim tokens");
@@ -210,7 +219,7 @@ function AppContent() {
         >
           {username ? (
             <>
-              {username} ({`${formatEth(thingBalances[address])} $THING`})
+              {username} ({`${formatEth(balances[address])} $THING`})
             </>
           ) : (
             'CLEAR'
@@ -311,7 +320,7 @@ function AppContent() {
       {showLeaderboard && (
         <Leaderboard 
           client={client} 
-          balances={thingBalances}
+          balances={balances}
           onClose={() => setShowLeaderboard(false)} 
         />
       )}
