@@ -21,7 +21,7 @@ export function FundWalletModal({ address, onClose }: FundWalletModalProps) {
       <div className="bg-white text-black p-6 rounded-lg max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4">Insufficient Funds</h2>
         <p className="mb-4">
-          Your controller doesn't have enough funds to pay for transaction fees. Please send some funds to your controller address on MAINNET:
+          Your controller doesn't have enough funds to pay for transaction fees. Please send some ETH on MAINNET to your controller address:
         </p>
         <div className="flex items-center mb-4">
           <div className="bg-gray-100 p-2 rounded flex-grow break-all mr-2">

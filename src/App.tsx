@@ -195,7 +195,15 @@ function AppContent() {
       
       toast.success(`Claimed ${formatEth(warrior.unclaimed_tokens)} $THING`);
     } catch (error) {
-      toast.error("Failed to claim tokens");
+      if (error.toString().includes("session/not-registered")) {
+        // If the user is not registered, open the connection page
+        openConnectionPage();
+      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee")) {
+        setShowFundWalletModal(true);
+      } else {
+        toast.error("Failed to claim tokens");
+        console.error(error);
+      }
     }
   };
 
