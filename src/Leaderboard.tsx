@@ -29,7 +29,7 @@ export function Leaderboard({ client, balances, onClose }: LeaderboardProps) {
           <ul>
             {leaderboard.map((warrior, index) => (
               <li key={warrior.address} className="mb-2">
-                <span className="font-bold">{index + 1}.</span> {usernamesCache?.[warrior.address] ?? warrior.address.slice(0, 6)}...{warrior.address.slice(-4)} - Score: {warrior.score} - {formatEth(balances?.[warrior.address] ?? 0n)} $THING
+                <span className="font-bold">{index + 1}.</span> {usernamesCache?.[warrior.address] ?? `${warrior.address.slice(0, 6)}...${warrior.address.slice(-4)}`} - Score: {warrior.score} - {formatEth(balances?.[warrior.address] ?? 0n)} $THING
               </li>
             ))}
           </ul>
