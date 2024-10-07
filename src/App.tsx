@@ -157,7 +157,7 @@ function AppContent() {
       if (error.toString().includes("session/not-registered")) {
         // If the user is not registered, open the connection page
         openConnectionPage();
-      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee") || error.toString().includes("Paymaster not supported")) {
+      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee") || error.toString().includes("Paymaster not supported") || error.toString().includes("ValidationFailure")) {
         setShowFundWalletModal(true);
       } else {
         console.error(error);
@@ -198,7 +198,7 @@ function AppContent() {
       if (error.toString().includes("session/not-registered")) {
         // If the user is not registered, open the connection page
         openConnectionPage();
-      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee") || error.toString().includes("Paymaster not supported")) {
+      } else if (error.toString().includes("exceeds balance") || error.toString().includes("Account balance is smaller than the transaction's max_fee") || error.toString().includes("Paymaster not supported") || error.toString().includes("ValidationFailure")) {
         setShowFundWalletModal(true);
       } else {
         toast.error("Failed to claim tokens");
