@@ -23,13 +23,13 @@ export function FundWalletModal({ address, onClose }: FundWalletModalProps) {
         <p className="mb-4">
           Your controller doesn't have enough funds to pay for transaction fees. Please send some ETH on MAINNET to your controller address:
         </p>
-        <div className="flex items-center mb-4">
-          <div className="bg-gray-100 p-2 rounded flex-grow break-all mr-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center mb-4">
+          <div className="bg-gray-100 p-2 rounded flex-grow break-all mr-2 mb-2 sm:mb-0 w-full sm:w-auto">
             {address}
           </div>
           <Button
             onClick={handleCopy}
-            className="bg-gray-200 text-black px-3 py-2 rounded hover:bg-gray-300 transition-colors"
+            className="bg-gray-200 text-black px-3 py-2 rounded hover:bg-gray-300 transition-colors w-full sm:w-auto"
           >
             {copied ? 'Copied!' : 'Copy'}
           </Button>
