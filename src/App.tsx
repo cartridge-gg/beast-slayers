@@ -20,6 +20,7 @@ import { useWarrior } from "./hooks/useWarrior";
 import { useThingBalance } from "./hooks/useThingBalance";
 import toast from "react-hot-toast";
 import { useViewport } from "@telegram-apps/sdk-react";
+import { Leaderboard } from './Leaderboard';
 
 const getBeastColor = (level: number) => {
   if (level <= 2) return "hue-rotate-0";
@@ -198,6 +199,8 @@ function AppContent() {
     return eth.toFixed(2);
   };
 
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-black">
       <div className="absolute top-2 right-2 z-50">
@@ -241,6 +244,12 @@ function AppContent() {
           <h1 className="text-white text-center mb-5 text-6xl">
             Hit Thing
           </h1>
+          <Button
+            className="bg-blue-500 text-white text-sm py-2 px-4 hover:bg-blue-600 transition-all absolute top-2 left-2"
+            onClick={() => setShowLeaderboard(true)}
+          >
+            Leaderboard
+          </Button>
         </div>
         <motion.div
           className="flex justify-center items-center h-1/2 w-full relative overflow-hidden"
@@ -299,6 +308,12 @@ function AppContent() {
           )}
         </div>
       </div>
+      {showLeaderboard && (
+        <Leaderboard 
+          client={client} 
+          onClose={() => setShowLeaderboard(false)} 
+        />
+      )}
     </div>
   );
 }
