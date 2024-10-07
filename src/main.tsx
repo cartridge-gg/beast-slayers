@@ -6,6 +6,7 @@ import "./index.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { SDKProvider } from "@telegram-apps/sdk-react";
+import { UsernamesProvider } from "./contexts/UsernamesContext.tsx";
 
 function useMaxToasts(max: number) {
   const { toasts } = useToasterStore();
@@ -32,12 +33,14 @@ function ToasterWithMax({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <SDKProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<App />} />
-        </Routes>
-      </Router>
-      <ToasterWithMax position="top-center" max={1} />
+      <UsernamesProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<App />} />
+          </Routes>
+        </Router>
+        <ToasterWithMax position="top-center" max={1} />
+      </UsernamesProvider>
     </SDKProvider>
   </React.StrictMode>
 );

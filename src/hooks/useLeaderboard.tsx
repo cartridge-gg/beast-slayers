@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { ToriiClient } from "@dojoengine/torii-wasm";
+import { useFetchUsernames } from "@/contexts/UsernamesContext";
 
 export interface LeaderboardWarrior {
   address: string;
@@ -92,6 +93,9 @@ export function useLeaderboard(client?: ToriiClient) {
       }
     };
   }, [client]);
+
+  const addresses = useMemo(() => leaderboard.map((entry) => entry.address), [leaderboard])
+  useFetchUsernames(addresses)
 
   return { leaderboard, loading };
 }
