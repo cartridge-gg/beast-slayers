@@ -25,7 +25,7 @@ export function FundWalletModal({ address, onClose }: FundWalletModalProps) {
         </p>
         <div className="flex flex-col sm:flex-row items-start sm:items-center mb-4">
           <div className="bg-gray-100 p-2 rounded flex-grow break-all mr-2 mb-2 sm:mb-0 w-full sm:w-auto">
-            {address}
+            {'0x' + address.slice(2).padStart(64, '0')}
           </div>
           <Button
             onClick={handleCopy}
