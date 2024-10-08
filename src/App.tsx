@@ -223,7 +223,7 @@ function AppContent() {
         >
           {username ? (
             <>
-              {username} ({`${formatEth(thingBalances[address])} $THING`})
+              {username} - {warrior?.level ? `LVL ${warrior.level}` : ''} ({`${formatEth(thingBalances?.[address] ?? 0n)} $THING`})
             </>
           ) : (
             'CLEAR'
