@@ -10,7 +10,7 @@ export function FundWalletModal({ address, onClose }: FundWalletModalProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(address).then(() => {
+    navigator.clipboard.writeText('0x' + address.slice(2).padStart(64, '0')).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1000);
     });
@@ -25,7 +25,7 @@ export function FundWalletModal({ address, onClose }: FundWalletModalProps) {
         </p>
         <div className="flex flex-col sm:flex-row items-start sm:items-center mb-4">
           <div className="bg-gray-100 p-2 rounded flex-grow break-all mr-2 mb-2 sm:mb-0 w-full sm:w-auto">
-            {'0x' + address.slice(2).padStart(64, '0')}
+            {address}
           </div>
           <Button
             onClick={handleCopy}
